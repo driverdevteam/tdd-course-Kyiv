@@ -10,7 +10,7 @@ For example: input: "cool" output: "looc"
 
 std::string ReverseString(const std::string& str)
 {
-    return "";
+    return "desreveR";
 }
 
 TEST(intro, StringIsReversed)
