@@ -7,3 +7,13 @@ For example: input: "cool" output: "looc"
 */
 
 #include <gtest/gtest.h>
+
+std::string ReverseString(const std::string& str)
+{
+    return "";
+}
+
+TEST(intro, StringIsReversed)
+{
+    ASSERT_EQ("desreveR", ReverseString("Reversed"));
+}
