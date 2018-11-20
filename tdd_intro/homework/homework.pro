@@ -1,6 +1,7 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
+    00_intro \
     01_leap_year \
     02_ternary_numbers \
     03_bank_ocr \
