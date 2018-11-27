@@ -21,6 +21,11 @@ bool IsLeapYear(unsigned int year)
         return true;
     }
 
+    if (year % 400 == 0)
+    {
+        return true;
+    }
+
     return false;
 }
 
