@@ -13,3 +13,8 @@ If your language provides a method in the standard library that does this look-u
 */
 
 #include <gtest/gtest.h>
+
+TEST(LeapYear, DivibleBy4)
+{
+    ASSERT_TRUE(IsLeapYear(1996));
+}
