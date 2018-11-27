@@ -38,3 +38,11 @@ TEST(LeapYear, DivisibleBy4ExceptDivisibleBy100UnlessDivisibleBy400)
 {
     ASSERT_TRUE(IsLeapYear(2000));
 }
+
+TEST(LeapYear, Acceptence)
+{
+    ASSERT_TRUE(IsLeapYear(2020));
+    ASSERT_TRUE(IsLeapYear(2008));
+    ASSERT_FALSE(IsLeapYear(1990));
+    ASSERT_FALSE(IsLeapYear(1000));
+}
