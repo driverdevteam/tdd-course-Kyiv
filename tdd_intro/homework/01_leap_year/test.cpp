@@ -14,6 +14,11 @@ If your language provides a method in the standard library that does this look-u
 
 #include <gtest/gtest.h>
 
+bool IsLeapYear(unsigned int year)
+{
+    return true;
+}
+
 TEST(LeapYear, DivibleBy4)
 {
     ASSERT_TRUE(IsLeapYear(1996));
