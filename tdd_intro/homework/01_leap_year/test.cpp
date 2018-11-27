@@ -28,3 +28,8 @@ TEST(LeapYear, DivibleBy4)
 {
     ASSERT_TRUE(IsLeapYear(1996));
 }
+
+TEST(LeapYear, DivisibleBy4ExceptDivisibleBy100)
+{
+    ASSERT_FALSE(IsLeapYear(1900));
+}
