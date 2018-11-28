@@ -16,7 +16,7 @@ If your language provides a method in the standard library that does this look-u
 
 bool is_leap_year(int year)
 {
-    if (year == 1996)
+    if (year == 1996 || year == 2000)
     {
         return true;
     }
