@@ -18,6 +18,7 @@ If your language provides a method in the standard library to perform the conver
 */
 
 const std::string g_ternary302 = "102012";
+const std::string g_ternary303 = "102020";
 
 int convert(const std::string &number)
 {
@@ -27,4 +28,9 @@ int convert(const std::string &number)
 TEST (ternary_numbers, check_302)
 {
     EXPECT_EQ(302, convert(g_ternary302));
+}
+
+TEST (ternary_numbers, check_303)
+{
+    EXPECT_EQ(303, convert(g_ternary303));
 }
