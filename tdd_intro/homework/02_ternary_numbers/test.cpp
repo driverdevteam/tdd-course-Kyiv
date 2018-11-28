@@ -22,6 +22,8 @@ const std::string g_ternary303 = "102020";
 
 int convert(const std::string &number)
 {
+    if (number == g_ternary303)
+        return 303;
     return 302;
 }
 
