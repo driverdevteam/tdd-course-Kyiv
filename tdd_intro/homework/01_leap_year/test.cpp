@@ -16,12 +16,15 @@ If your language provides a method in the standard library that does this look-u
 
 bool is_leap_year(uint32_t year)
 {
-    if (year % 400 == 0)
-        return true;
-
-    if (year % 4 == 0 && year % 100 != 0)
+    if (year % 4 == 0)
     {
-        return true;
+        if (year % 100 == 0)
+        {
+            year /= 100;
+            return is_leap_year(year);
+        }
+        else
+            return true;
     }
     return false;
 }
