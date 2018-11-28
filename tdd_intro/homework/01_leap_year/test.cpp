@@ -23,3 +23,8 @@ TEST(leap_year, test_1997)
 {
     EXPECT_EQ(false, is_leap_year(1997));
 }
+
+TEST(leap_year, test_1996)
+{
+    EXPECT_EQ(true, is_leap_year(1996));
+}
