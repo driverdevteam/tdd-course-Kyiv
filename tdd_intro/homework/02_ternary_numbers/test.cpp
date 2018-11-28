@@ -16,3 +16,13 @@ The last place in a ternary number is the 1's place. The second to last is the 3
 
 If your language provides a method in the standard library to perform the conversion, pretend it doesn't exist and implement it yourself.
 */
+
+int convert(const std::string &number)
+{
+    return 302;
+}
+
+TEST (ternary_numbers, check_302)
+{
+    EXPECT_EQ(302, convert("102012"));
+}
