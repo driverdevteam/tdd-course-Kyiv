@@ -16,7 +16,7 @@ If your language provides a method in the standard library that does this look-u
 
 bool is_leap_year(uint32_t year)
 {
-    if (year == 1996 || year == 2000 || year == 4)
+    if (year % 4 == 0)
     {
         return true;
     }
@@ -46,4 +46,9 @@ TEST(leap_year, test_2000)
 TEST(leap_year, test_4)
 {
     EXPECT_EQ(true, is_leap_year(4));
+}
+
+TEST(leap_year, test_100)
+{
+    EXPECT_EQ(false, is_leap_year(100));
 }
