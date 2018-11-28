@@ -23,8 +23,18 @@ const std::string g_ternary303 = "102020";
 const std::string g_ternary304 = "102021";
 const std::string g_ternary305 = "102022";
 
-int convert(const std::string &number)
+
+const std::string g_ternary222 = "22020";
+const std::string g_ternary333 = "110100";
+const std::string g_ternary765 = "1001100";
+const std::string g_ternary345 = "110210";
+
+
+uint32_t convert(const std::string &number)
 {
+    if (number.empty())
+        return -1;
+
     int result = 0;
     int place = number.size();
     for (const char& a: number)
@@ -54,4 +64,11 @@ TEST (ternary_numbers, check_305)
     EXPECT_EQ(305, convert(g_ternary305));
 }
 
-
+TEST (ternary_numbers, acceptance)
+{
+    EXPECT_EQ(222, convert(g_ternary222));
+    EXPECT_EQ(333, convert(g_ternary333));
+    EXPECT_EQ(765, convert(g_ternary765));
+    EXPECT_EQ(345, convert(g_ternary345));
+    EXPECT_EQ(-1, convert(""));
+}
