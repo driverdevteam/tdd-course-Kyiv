@@ -14,7 +14,7 @@ If your language provides a method in the standard library that does this look-u
 
 #include <gtest/gtest.h>
 
-bool is_leap_year(int year)
+bool is_leap_year(uint32_t year)
 {
     if (year == 1996 || year == 2000)
     {
@@ -41,4 +41,9 @@ TEST(leap_year, test_1990)
 TEST(leap_year, test_2000)
 {
     EXPECT_EQ(true, is_leap_year(2000));
+}
+
+TEST(leap_year, test_4)
+{
+    EXPECT_EQ(true, is_leap_year(4));
 }
