@@ -58,3 +58,12 @@ TEST(leap_year, test_100)
 {
     EXPECT_EQ(false, is_leap_year(100));
 }
+
+TEST(leap_year, acceptance)
+{
+    EXPECT_EQ(true, is_leap_year(400));
+    EXPECT_EQ(true, is_leap_year(2004));
+    EXPECT_EQ(false, is_leap_year(500));
+    EXPECT_EQ(false, is_leap_year(2100));
+    EXPECT_EQ(false, is_leap_year(1234));
+}
