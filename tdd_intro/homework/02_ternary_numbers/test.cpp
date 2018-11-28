@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <math.h>
 
 /*
 Convert a ternary number, represented as a string (e.g. '102012'), to its decimal equivalent using first principles.
@@ -24,11 +25,13 @@ const std::string g_ternary305 = "102022";
 
 int convert(const std::string &number)
 {
-    if (number == g_ternary303)
-        return 303;
-    if (number == g_ternary304)
-        return 304;
-    return 302;
+    int result = 0;
+    int place = number.size();
+    for (const char& a: number)
+    {
+        result += (a - '0') * std::pow(3, --place);
+    }
+    return result;
 }
 
 TEST (ternary_numbers, check_302)
