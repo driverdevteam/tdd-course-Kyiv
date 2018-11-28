@@ -20,11 +20,14 @@ If your language provides a method in the standard library to perform the conver
 const std::string g_ternary302 = "102012";
 const std::string g_ternary303 = "102020";
 const std::string g_ternary304 = "102021";
+const std::string g_ternary305 = "102022";
 
 int convert(const std::string &number)
 {
     if (number == g_ternary303)
         return 303;
+    if (number == g_ternary304)
+        return 304;
     return 302;
 }
 
@@ -41,6 +44,11 @@ TEST (ternary_numbers, check_303)
 TEST (ternary_numbers, check_304)
 {
     EXPECT_EQ(304, convert(g_ternary304));
+}
+
+TEST (ternary_numbers, check_305)
+{
+    EXPECT_EQ(305, convert(g_ternary305));
 }
 
 
