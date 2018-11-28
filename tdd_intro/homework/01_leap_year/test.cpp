@@ -13,3 +13,57 @@ If your language provides a method in the standard library that does this look-u
 */
 
 #include <gtest/gtest.h>
+
+bool is_leap_year(uint32_t year)
+{
+    if (year % 4 == 0)
+    {
+        if (year % 100 == 0)
+        {
+            year /= 100;
+            return is_leap_year(year);
+        }
+        else
+            return true;
+    }
+    return false;
+}
+
+TEST(leap_year, test_1997)
+{
+    EXPECT_EQ(false, is_leap_year(1997));
+}
+
+TEST(leap_year, test_1996)
+{
+    EXPECT_EQ(true, is_leap_year(1996));
+}
+
+TEST(leap_year, test_1990)
+{
+    EXPECT_EQ(false, is_leap_year(1990));
+}
+
+TEST(leap_year, test_2000)
+{
+    EXPECT_EQ(true, is_leap_year(2000));
+}
+
+TEST(leap_year, test_4)
+{
+    EXPECT_EQ(true, is_leap_year(4));
+}
+
+TEST(leap_year, test_100)
+{
+    EXPECT_EQ(false, is_leap_year(100));
+}
+
+TEST(leap_year, acceptance)
+{
+    EXPECT_EQ(true, is_leap_year(400));
+    EXPECT_EQ(true, is_leap_year(2004));
+    EXPECT_EQ(false, is_leap_year(500));
+    EXPECT_EQ(false, is_leap_year(2100));
+    EXPECT_EQ(false, is_leap_year(1234));
+}
