@@ -16,3 +16,28 @@ The last place in a ternary number is the 1's place. The second to last is the 3
 
 If your language provides a method in the standard library to perform the conversion, pretend it doesn't exist and implement it yourself.
 */
+
+unsigned int TernaryNumber(unsigned int index, unsigned int number)
+{
+    if (number > 2)
+    {
+        return 0;
+    }
+
+    return 1;
+}
+
+TEST(TernaryNumbers, OneNumber)
+{
+    ASSERT_EQ(1, TernaryNumber(1, 1));
+}
+
+TEST(TernaryNumbers, WrongNumber)
+{
+    ASSERT_EQ(0, TernaryNumber(1, 3));
+}
+
+TEST(TernaryNumbers, OneIndexTwoNumber)
+{
+    ASSERT_EQ(2, TernaryNumber(1, 2));
+}
