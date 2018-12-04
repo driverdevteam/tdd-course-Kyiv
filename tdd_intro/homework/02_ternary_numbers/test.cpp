@@ -19,6 +19,11 @@ If your language provides a method in the standard library to perform the conver
 
 unsigned int TernaryNumber(unsigned int index, unsigned int number)
 {
+    if (number > 2)
+    {
+        return 0;
+    }
+
     return 3;
 }
 
