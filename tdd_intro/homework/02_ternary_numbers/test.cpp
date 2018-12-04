@@ -43,9 +43,15 @@ unsigned int ConvertTernaryNumbers(const std::string &numbers)
     unsigned int sum = 0;
     for (auto rIter = numbers.rbegin(); rIter != numbers.rend(); ++rIter)
     {
+        unsigned int number = std::stoul(std::string(1, *rIter));
+        if (number > MaxNumeber)
+        {
+            return 0;
+        }
+
         unsigned int rIterIndex = rIter - numbers.rbegin();
         unsigned int place = rIterIndex == 0 ? 1 : rIterIndex * IndexMultiplier;
-        unsigned int num = TernaryNumber(place, std::stoul(std::string(1, *rIter)));
+        unsigned int num = TernaryNumber(place, number);
 
         sum += num;
     }
