@@ -46,3 +46,8 @@ TEST(TernaryNumbers, OneIndexTwoNumber)
 {
     ASSERT_EQ(6, TernaryNumber(1, 2));
 }
+
+TEST(TernaryNumbers, EmptyNumberString)
+{
+    ASSERT_EQ(0, ConvertTernaryNumbers(""));
+}
