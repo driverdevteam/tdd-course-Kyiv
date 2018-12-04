@@ -25,6 +25,11 @@ const unsigned int IndexMultiplier = 3;
 
 unsigned int TernaryNumber(unsigned int index, unsigned int number)
 {
+    if (number > MaxNumber)
+    {
+        return 0;
+    }
+
     return number * static_cast<unsigned int>(std::pow(PowNumeber, index));
 }
 
@@ -87,4 +92,12 @@ TEST(TernaryNumbers, MultipleNumberString)
 TEST(TernaryNumbers, WrongMultipleNumberString)
 {
     ASSERT_EQ(0, ConvertTernaryNumbers("13"));
+}
+
+TEST(TernaryNumbers, Acceptence)
+{
+    ASSERT_EQ(0, ConvertTernaryNumbers("3102"));
+    ASSERT_EQ(0, ConvertTernaryNumbers("0"));
+    ASSERT_EQ(6, ConvertTernaryNumbers("02"));
+    ASSERT_EQ(19743, ConvertTernaryNumbers("1022"));
 }
