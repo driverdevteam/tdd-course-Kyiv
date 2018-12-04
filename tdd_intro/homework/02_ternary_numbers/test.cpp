@@ -61,3 +61,9 @@ TEST(TernaryNumbers, EmptyNumberString)
 {
     ASSERT_EQ(0, ConvertTernaryNumbers(""));
 }
+
+
+TEST(TernaryNumbers, OneNumberString)
+{
+    ASSERT_EQ(3, ConvertTernaryNumbers("1"));
+}
