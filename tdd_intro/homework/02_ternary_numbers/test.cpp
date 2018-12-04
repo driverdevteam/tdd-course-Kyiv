@@ -24,7 +24,7 @@ unsigned int TernaryNumber(unsigned int index, unsigned int number)
         return 0;
     }
 
-    return 3;
+    return number * std::pow(3, index);
 }
 
 TEST(TernaryNumbers, OneNumber)
