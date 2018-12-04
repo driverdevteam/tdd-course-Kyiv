@@ -66,3 +66,8 @@ TEST(TernaryNumbers, OneNumberString)
 {
     ASSERT_EQ(3, ConvertTernaryNumbers("1"));
 }
+
+TEST(TernaryNumbers, MultipleNumberString)
+{
+    ASSERT_EQ(3, ConvertTernaryNumbers("10"));
+}
