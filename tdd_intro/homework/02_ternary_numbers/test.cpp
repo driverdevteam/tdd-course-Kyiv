@@ -19,17 +19,12 @@ If your language provides a method in the standard library to perform the conver
 
 #include <cmath>
 
-const unsigned int MaxNumeber = 2;
+const unsigned int MaxNumber = 2;
 const unsigned int PowNumeber = 3;
 const unsigned int IndexMultiplier = 3;
 
 unsigned int TernaryNumber(unsigned int index, unsigned int number)
 {
-    if (number > MaxNumeber)
-    {
-        return 0;
-    }
-
     return number * static_cast<unsigned int>(std::pow(PowNumeber, index));
 }
 
@@ -44,7 +39,7 @@ unsigned int ConvertTernaryNumbers(const std::string &numbers)
     for (auto rIter = numbers.rbegin(); rIter != numbers.rend(); ++rIter)
     {
         unsigned int number = std::stoul(std::string(1, *rIter));
-        if (number > MaxNumeber)
+        if (number > MaxNumber)
         {
             return 0;
         }
