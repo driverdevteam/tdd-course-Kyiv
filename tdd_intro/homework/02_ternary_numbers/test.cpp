@@ -39,7 +39,7 @@ unsigned int ConvertTernaryNumbers(const std::string &numbers)
         return 0;
     }
 
-    return 1;
+    return TernaryNumber(1, std::stoul(numbers));
 }
 
 TEST(TernaryNumbers, OneNumber)
@@ -61,7 +61,6 @@ TEST(TernaryNumbers, EmptyNumberString)
 {
     ASSERT_EQ(0, ConvertTernaryNumbers(""));
 }
-
 
 TEST(TernaryNumbers, OneNumberString)
 {
