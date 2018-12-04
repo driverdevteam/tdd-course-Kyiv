@@ -36,3 +36,8 @@ TEST(TernaryNumbers, WrongNumber)
 {
     ASSERT_EQ(0, TernaryNumber(1, 3));
 }
+
+TEST(TernaryNumbers, OneIndexTwoNumber)
+{
+    ASSERT_EQ(6, TernaryNumber(1, 2));
+}
