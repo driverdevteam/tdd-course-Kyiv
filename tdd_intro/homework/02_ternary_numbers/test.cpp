@@ -21,6 +21,7 @@ If your language provides a method in the standard library to perform the conver
 
 const unsigned int MaxNumeber = 2;
 const unsigned int PowNumeber = 3;
+const unsigned int IndexMultiplier = 3;
 
 unsigned int TernaryNumber(unsigned int index, unsigned int number)
 {
@@ -43,8 +44,9 @@ unsigned int ConvertTernaryNumbers(const std::string &numbers)
     for (auto rIter = numbers.rbegin(); rIter != numbers.rend(); ++rIter)
     {
         unsigned int rIterIndex = rIter - numbers.rbegin();
-        unsigned int place = rIterIndex == 0 ? 1 : rIterIndex * 3;
+        unsigned int place = rIterIndex == 0 ? 1 : rIterIndex * IndexMultiplier;
         unsigned int num = TernaryNumber(place, std::stoul(std::string(1, *rIter)));
+
         sum += num;
     }
 
@@ -79,4 +81,9 @@ TEST(TernaryNumbers, OneNumberString)
 TEST(TernaryNumbers, MultipleNumberString)
 {
     ASSERT_EQ(27, ConvertTernaryNumbers("10"));
+}
+
+TEST(TernaryNumbers, WrongMultipleNumberString)
+{
+    ASSERT_EQ(0, ConvertTernaryNumbers("13"));
 }
