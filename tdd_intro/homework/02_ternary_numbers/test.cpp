@@ -32,6 +32,16 @@ unsigned int TernaryNumber(unsigned int index, unsigned int number)
     return number * static_cast<unsigned int>(std::pow(PowNumeber, index));
 }
 
+unsigned int ConvertTernaryNumbers(const std::string &numbers)
+{
+    if (numbers.empty())
+    {
+        return 0;
+    }
+
+    return 1;
+}
+
 TEST(TernaryNumbers, OneNumber)
 {
     ASSERT_EQ(3, TernaryNumber(1, 1));
