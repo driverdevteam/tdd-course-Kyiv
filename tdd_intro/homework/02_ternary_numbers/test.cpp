@@ -17,14 +17,19 @@ The last place in a ternary number is the 1's place. The second to last is the 3
 If your language provides a method in the standard library to perform the conversion, pretend it doesn't exist and implement it yourself.
 */
 
+#include <cmath>
+
+const unsigned int MaxNumeber = 2;
+const unsigned int PowNumeber = 3;
+
 unsigned int TernaryNumber(unsigned int index, unsigned int number)
 {
-    if (number > 2)
+    if (number > MaxNumeber)
     {
         return 0;
     }
 
-    return number * std::pow(3, index);
+    return number * static_cast<unsigned int>(std::pow(PowNumeber, index));
 }
 
 TEST(TernaryNumbers, OneNumber)
