@@ -26,3 +26,8 @@ TEST(TernaryNumbers, OneNumber)
 {
     ASSERT_EQ(3, TernaryNumber(1, 1));
 }
+
+TEST(TernaryNumbers, WrongNumber)
+{
+    ASSERT_EQ(0, TernaryNumber(1, 3));
+}
