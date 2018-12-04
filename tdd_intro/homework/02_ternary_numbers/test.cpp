@@ -39,7 +39,16 @@ unsigned int ConvertTernaryNumbers(const std::string &numbers)
         return 0;
     }
 
-    return TernaryNumber(1, std::stoul(numbers));
+    unsigned int sum = 0;
+    for (auto rIter = numbers.rbegin(); rIter != numbers.rend(); ++rIter)
+    {
+        unsigned int rIterIndex = rIter - numbers.rbegin();
+        unsigned int place = rIterIndex == 0 ? 1 : rIterIndex * 3;
+        unsigned int num = TernaryNumber(place, std::stoul(std::string(1, *rIter)));
+        sum += num;
+    }
+
+    return sum;
 }
 
 TEST(TernaryNumbers, OneNumber)
@@ -69,5 +78,5 @@ TEST(TernaryNumbers, OneNumberString)
 
 TEST(TernaryNumbers, MultipleNumberString)
 {
-    ASSERT_EQ(3, ConvertTernaryNumbers("10"));
+    ASSERT_EQ(27, ConvertTernaryNumbers("10"));
 }
