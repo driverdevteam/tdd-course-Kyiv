@@ -240,7 +240,12 @@ TEST(BankOcr, GetZeroIndexDigit)
     ASSERT_EQ("", GetDigitCell(" _  _  _  _  _  _  _  _  _ |_ |_ |_ |_ |_ |_ |_ |_ |_  _| _| _| _| _| _| _| _| _|" , 0));
 }
 
-TEST(BankOcr, GetSignleNumberWithIndex)
+TEST(BankOcr, GetNumbers123456789)
 {
     ASSERT_EQ("123456789", GetNumbers("    _  _     _  _  _  _  _   | _| _||_||_ |_   ||_||_|  ||_  _|  | _||_|  ||_| _|"));
+}
+
+TEST(BankOcr, GetNumbers000000000)
+{
+    ASSERT_EQ("000000000", GetNumbers(" _  _  _  _  _  _  _  _  _ | || || || || || || || || ||_||_||_||_||_||_||_||_||_|"));
 }
