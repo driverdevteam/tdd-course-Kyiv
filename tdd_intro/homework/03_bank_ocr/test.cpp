@@ -136,7 +136,7 @@ std::string ParseNumberCell(const std::string &str)
 
 std::string GetDigitCell(const std::string &str, unsigned int digitIndex)
 {
-    if (str.size() != MACHINE_LINE_LENGTH || digitIndex > MAX_DIGIT_INDEX)
+    if (str.size() != MACHINE_LINE_LENGTH || digitIndex > MAX_DIGIT_INDEX || digitIndex == 0)
     {
         return "";
     }
