@@ -99,6 +99,8 @@ Example input and output
  * - Aceptance
  */
 
+const std::string ZERO_DIGIT = " _ | ||_|";
+
 std::string ParseNumberCell(const std::string &str)
 {
     return "0";
@@ -106,5 +108,5 @@ std::string ParseNumberCell(const std::string &str)
 
 TEST(BankOcr, MachineDigitToString0)
 {
-    ASSERT_EQ("0", ParseNumberCell(" _ | ||_|"));
+    ASSERT_EQ("0", ParseNumberCell(ZERO_DIGIT));
 }
