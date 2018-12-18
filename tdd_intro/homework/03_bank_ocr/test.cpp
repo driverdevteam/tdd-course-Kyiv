@@ -110,3 +110,8 @@ TEST(BankOcr, MachineDigitToString0)
 {
     ASSERT_EQ("0", ParseNumberCell(ZERO_DIGIT));
 }
+
+TEST(BankOcr, MachineWrongDigitToString)
+{
+    ASSERT_EQ("", ParseNumberCell("_---__--"));
+}
