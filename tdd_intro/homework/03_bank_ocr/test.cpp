@@ -140,9 +140,11 @@ std::string GetDigitCell(const std::string &str, unsigned int digitIndex)
         return "";
     }
 
-    std::string number = str.substr(DIGIT_FIRST_LINE_INDEX + (digitIndex - 1) * DIGIT_WIDTH, DIGIT_WIDTH);
-    number += str.substr(DIGIT_SECOND_LINE_INDEX + (digitIndex - 1) * DIGIT_WIDTH, DIGIT_WIDTH);
-    number += str.substr(DIGIT_THIRD_LINE_INDEX + (digitIndex - 1) * DIGIT_WIDTH, DIGIT_WIDTH);
+    unsigned int digitOffset = (digitIndex - 1) * DIGIT_WIDTH;
+
+    std::string number = str.substr(DIGIT_FIRST_LINE_INDEX + digitOffset, DIGIT_WIDTH);
+    number += str.substr(DIGIT_SECOND_LINE_INDEX + digitOffset, DIGIT_WIDTH);
+    number += str.substr(DIGIT_THIRD_LINE_INDEX + digitOffset, DIGIT_WIDTH);
 
     return number;
 }
