@@ -229,3 +229,8 @@ TEST(BankOcr, GetWrongIndexDigit)
 {
     ASSERT_EQ("", GetDigitCell(" _  _  _  _  _  _  _  _  _ |_ |_ |_ |_ |_ |_ |_ |_ |_  _| _| _| _| _| _| _| _| _|" , 10));
 }
+
+TEST(BankOcr, GetZeroIndexDigit)
+{
+    ASSERT_EQ("", GetDigitCell(" _  _  _  _  _  _  _  _  _ |_ |_ |_ |_ |_ |_ |_ |_ |_  _| _| _| _| _| _| _| _| _|" , 0));
+}
