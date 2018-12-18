@@ -204,3 +204,8 @@ TEST(BankOcr, GetFirstLineDigitOne)
 {
     ASSERT_EQ(ONE_DIGIT, GetDigitCell("                             |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |"));
 }
+
+TEST(BankOcr, WrongLineLength)
+{
+    ASSERT_EQ("", GetDigitCell("                   |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |"));
+}
