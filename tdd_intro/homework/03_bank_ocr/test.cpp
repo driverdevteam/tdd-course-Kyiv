@@ -133,6 +133,11 @@ std::string ParseNumberCell(const std::string &str)
 
 std::string GetDigitCell(const std::string &str)
 {
+    if (str.size() != 81)
+    {
+        return "";
+    }
+
     std::string number = str.substr(DIGIT_FIRST_LINE_INDEX, DIGIT_WIDTH);
     number += str.substr(DIGIT_SECOND_LINE_INDEX, DIGIT_WIDTH);
     number += str.substr(DIGIT_THIRD_LINE_INDEX, DIGIT_WIDTH);
