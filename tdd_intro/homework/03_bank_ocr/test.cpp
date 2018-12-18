@@ -153,7 +153,7 @@ std::string GetDigitCell(const std::string &str, unsigned int digitIndex)
 std::string GetNumbers(const std::string &machineNumber)
 {
     std::string parsedNumbers;
-    for (unsigned int index = 0; index < 9; index++)
+    for (unsigned int index = 0; index < MAX_DIGIT_INDEX; index++)
     {
         std::string number = GetDigitCell(machineNumber, index + 1);
         std::string parsedNumber = ParseNumberCell(number);
