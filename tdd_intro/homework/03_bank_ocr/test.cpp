@@ -220,40 +220,70 @@ TEST(BankOcr, MachineDigitToString9)
 
 TEST(BankOcr, GetFirstLineDigitZero)
 {
-    ASSERT_EQ(ZERO_DIGIT, GetDigitCell(" _  _  _  _  _  _  _  _  _ | || || || || || || || || ||_||_||_||_||_||_||_||_||_|", 1));
+    ASSERT_EQ(ZERO_DIGIT, GetDigitCell(" _  _  _  _  _  _  _  _  _ "
+                                       "| || || || || || || || || |"
+                                       "|_||_||_||_||_||_||_||_||_|", 1));
 }
 
 TEST(BankOcr, GetFirstLineDigitOne)
 {
-    ASSERT_EQ(ONE_DIGIT, GetDigitCell("                             |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |", 1));
+    ASSERT_EQ(ONE_DIGIT, GetDigitCell("                           "
+                                      "  |  |  |  |  |  |  |  |  |"
+                                      "  |  |  |  |  |  |  |  |  |", 1));
 }
 
 TEST(BankOcr, WrongLineLength)
 {
-    ASSERT_EQ("", GetDigitCell("                   |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |", 1));
+    ASSERT_EQ("", GetDigitCell("                   "
+                               "|  |  |  |  |  |  |  |  |  "
+                               "|  |  |  |  |  |  |  |  |", 1));
 }
 
 TEST(BankOcr, GetSecondLineDigitFive)
 {
-    ASSERT_EQ(FIVE_DIGIT, GetDigitCell(" _  _  _  _  _  _  _  _  _ |_ |_ |_ |_ |_ |_ |_ |_ |_  _| _| _| _| _| _| _| _| _|" , 2));
+    ASSERT_EQ(FIVE_DIGIT, GetDigitCell(" _  _  _  _  _  _  _  _  _ "
+                                       "|_ |_ |_ |_ |_ |_ |_ |_ |_ "
+                                       " _| _| _| _| _| _| _| _| _|" , 2));
 }
 
 TEST(BankOcr, GetWrongIndexDigit)
 {
-    ASSERT_EQ("", GetDigitCell(" _  _  _  _  _  _  _  _  _ |_ |_ |_ |_ |_ |_ |_ |_ |_  _| _| _| _| _| _| _| _| _|" , 10));
+    ASSERT_EQ("", GetDigitCell(" _  _  _  _  _  _  _  _  _ "
+                               "|_ |_ |_ |_ |_ |_ |_ |_ |_ "
+                               " _| _| _| _| _| _| _| _| _|" , 10));
 }
 
 TEST(BankOcr, GetZeroIndexDigit)
 {
-    ASSERT_EQ("", GetDigitCell(" _  _  _  _  _  _  _  _  _ |_ |_ |_ |_ |_ |_ |_ |_ |_  _| _| _| _| _| _| _| _| _|" , 0));
+    ASSERT_EQ("", GetDigitCell(" _  _  _  _  _  _  _  _  _ "
+                               "|_ |_ |_ |_ |_ |_ |_ |_ |_ "
+                               " _| _| _| _| _| _| _| _| _|" , 0));
 }
 
 TEST(BankOcr, GetNumbers123456789)
 {
-    ASSERT_EQ("123456789", GetNumbers("    _  _     _  _  _  _  _   | _| _||_||_ |_   ||_||_|  ||_  _|  | _||_|  ||_| _|"));
+    ASSERT_EQ("123456789", GetNumbers("    _  _     _  _  _  _  _ "
+                                      "  | _| _||_||_ |_   ||_||_|"
+                                      "  ||_  _|  | _||_|  ||_| _|"));
 }
 
 TEST(BankOcr, GetNumbers000000000)
 {
-    ASSERT_EQ("000000000", GetNumbers(" _  _  _  _  _  _  _  _  _ | || || || || || || || || ||_||_||_||_||_||_||_||_||_|"));
+    ASSERT_EQ("000000000", GetNumbers(" _  _  _  _  _  _  _  _  _ "
+                                      "| || || || || || || || || |"
+                                      "|_||_||_||_||_||_||_||_||_|"));
+}
+
+TEST(BankOcr, Acceptance)
+{
+    ASSERT_EQ("", GetNumbers(" _  _  _  _  _  _  _  _  _ | || || "
+                             "|| || || || || || ||_| || || ||_||_"
+                             "||_||_||_||_||_||_|| || || ||_||_||_"
+                             "||_||_||_||_||_|||"));
+    ASSERT_EQ("666666666", GetNumbers(" _  _  _  _  _  _  _  _  _ "
+                                      "|_ |_ |_ |_ |_ |_ |_ |_ |_ "
+                                      "|_||_||_||_||_||_||_||_||_|"));
+    ASSERT_EQ("868266669", GetNumbers(" _  _  _  _  _  _  _  _  _ "
+                                      "|_||_ |_| _||_ |_ |_ |_ |_|"
+                                      "|_||_||_||_ |_||_||_||_| _|"));
 }
