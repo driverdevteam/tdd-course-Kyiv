@@ -133,16 +133,16 @@ std::string ParseNumberCell(const std::string &str)
     return "";
 }
 
-std::string GetDigitCell(const std::string &str)
+std::string GetDigitCell(const std::string &str, unsigned int digitIndex)
 {
     if (str.size() != MACHINE_LINE_LENGTH)
     {
         return "";
     }
 
-    std::string number = str.substr(DIGIT_FIRST_LINE_INDEX, DIGIT_WIDTH);
-    number += str.substr(DIGIT_SECOND_LINE_INDEX, DIGIT_WIDTH);
-    number += str.substr(DIGIT_THIRD_LINE_INDEX, DIGIT_WIDTH);
+    std::string number = str.substr(DIGIT_FIRST_LINE_INDEX + (digitIndex - 1) * DIGIT_WIDTH, DIGIT_WIDTH);
+    number += str.substr(DIGIT_SECOND_LINE_INDEX + (digitIndex - 1) * DIGIT_WIDTH, DIGIT_WIDTH);
+    number += str.substr(DIGIT_THIRD_LINE_INDEX + (digitIndex - 1) * DIGIT_WIDTH, DIGIT_WIDTH);
 
     return number;
 }
@@ -204,20 +204,20 @@ TEST(BankOcr, MachineDigitToString9)
 
 TEST(BankOcr, GetFirstLineDigitZero)
 {
-    ASSERT_EQ(ZERO_DIGIT, GetDigitCell(" _  _  _  _  _  _  _  _  _ | || || || || || || || || ||_||_||_||_||_||_||_||_||_|"));
+    ASSERT_EQ(ZERO_DIGIT, GetDigitCell(" _  _  _  _  _  _  _  _  _ | || || || || || || || || ||_||_||_||_||_||_||_||_||_|", 1));
 }
 
 TEST(BankOcr, GetFirstLineDigitOne)
 {
-    ASSERT_EQ(ONE_DIGIT, GetDigitCell("                             |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |"));
+    ASSERT_EQ(ONE_DIGIT, GetDigitCell("                             |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |", 1));
 }
 
 TEST(BankOcr, WrongLineLength)
 {
-    ASSERT_EQ("", GetDigitCell("                   |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |"));
+    ASSERT_EQ("", GetDigitCell("                   |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |", 1));
 }
 
 TEST(BankOcr, GetSecondLineDigitFive)
 {
-    ASSERT_EQ(FIVE_DIGIT, GetDigitCell("    _  _     _  _  _  _  _   | _| _||_||_ |_   ||_||_|  ||_  _|  | _||_|  ||_| _|" , 2));
+    ASSERT_EQ(FIVE_DIGIT, GetDigitCell(" _  _  _  _  _  _  _  _  _ |_ |_ |_ |_ |_ |_ |_ |_ |_  _| _| _| _| _| _| _| _| _|" , 2));
 }
