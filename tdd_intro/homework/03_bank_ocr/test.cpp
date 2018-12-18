@@ -103,7 +103,9 @@ const std::string ZERO_DIGIT = " _ | ||_|";
 
 std::string ParseNumberCell(const std::string &str)
 {
-    return "0";
+    if (str == ZERO_DIGIT) return "0";
+
+    return "";
 }
 
 TEST(BankOcr, MachineDigitToString0)
