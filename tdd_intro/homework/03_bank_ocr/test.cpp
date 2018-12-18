@@ -115,6 +115,8 @@ const unsigned int DIGIT_FIRST_LINE_INDEX = 0;
 const unsigned int DIGIT_SECOND_LINE_INDEX = 27;
 const unsigned int DIGIT_THIRD_LINE_INDEX = 54;
 
+const unsigned int MACHINE_LINE_LENGTH = 81;
+
 std::string ParseNumberCell(const std::string &str)
 {
     if (str == ZERO_DIGIT) return "0";
@@ -133,7 +135,7 @@ std::string ParseNumberCell(const std::string &str)
 
 std::string GetDigitCell(const std::string &str)
 {
-    if (str.size() != 81)
+    if (str.size() != MACHINE_LINE_LENGTH)
     {
         return "";
     }
