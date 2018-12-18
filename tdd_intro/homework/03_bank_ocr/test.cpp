@@ -150,6 +150,11 @@ std::string GetDigitCell(const std::string &str, unsigned int digitIndex)
     return number;
 }
 
+std::string GetNumbers(const std::string &machineNumber)
+{
+    return "123456789";
+}
+
 TEST(BankOcr, MachineDigitToString0)
 {
     ASSERT_EQ("0", ParseNumberCell(ZERO_DIGIT));
