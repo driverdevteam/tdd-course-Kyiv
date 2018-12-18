@@ -234,3 +234,8 @@ TEST(BankOcr, GetZeroIndexDigit)
 {
     ASSERT_EQ("", GetDigitCell(" _  _  _  _  _  _  _  _  _ |_ |_ |_ |_ |_ |_ |_ |_ |_  _| _| _| _| _| _| _| _| _|" , 0));
 }
+
+TEST(BankOcr, GetSignleNumberWithIndex)
+{
+    ASSERT_EQ("123456789", GetNumbers("    _  _     _  _  _  _  _   | _| _||_||_ |_   ||_||_|  ||_  _|  | _||_|  ||_| _|"));
+}
