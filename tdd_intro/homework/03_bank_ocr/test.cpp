@@ -126,6 +126,11 @@ std::string ParseNumberCell(const std::string &str)
     return "";
 }
 
+std::string GetDigitCell(const std::string &str)
+{
+    return ZERO_DIGIT;
+}
+
 TEST(BankOcr, MachineDigitToString0)
 {
     ASSERT_EQ("0", ParseNumberCell(ZERO_DIGIT));
