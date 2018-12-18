@@ -110,6 +110,11 @@ const std::string SEVEN_DIGIT = " _   |  |";
 const std::string EIGHT_DIGIT = " _ |_||_|";
 const std::string NINE_DIGIT = " _ |_| _|";
 
+const unsigned int DIGIT_WIDTH = 3;
+const unsigned int DIGIT_FIRST_LINE_INDEX = 0;
+const unsigned int DIGIT_SECOND_LINE_INDEX = 27;
+const unsigned int DIGIT_THIRD_LINE_INDEX = 54;
+
 std::string ParseNumberCell(const std::string &str)
 {
     if (str == ZERO_DIGIT) return "0";
@@ -128,9 +133,9 @@ std::string ParseNumberCell(const std::string &str)
 
 std::string GetDigitCell(const std::string &str)
 {
-    std::string number = str.substr(0, 3);
-    number += str.substr(27, 3);
-    number += str.substr(54, 3);
+    std::string number = str.substr(DIGIT_FIRST_LINE_INDEX, DIGIT_WIDTH);
+    number += str.substr(DIGIT_SECOND_LINE_INDEX, DIGIT_WIDTH);
+    number += str.substr(DIGIT_THIRD_LINE_INDEX, DIGIT_WIDTH);
 
     return number;
 }
