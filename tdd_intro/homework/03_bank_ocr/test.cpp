@@ -86,3 +86,17 @@ Example input and output
 */
 #include <gtest/gtest.h>
 #include <string>
+
+
+/*
+ * - Get line
+ * - Wrong line
+ * - Get cell
+ * - Wrong cell
+ * - Parse number (test for each 1..9)
+ * - Wrong number
+ * - Get numbers
+ * - Aceptance
+ */
+
+
