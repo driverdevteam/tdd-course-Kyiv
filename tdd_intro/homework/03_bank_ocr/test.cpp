@@ -89,14 +89,17 @@ Example input and output
 
 
 /*
+ * - Parse digit (test for each 1..9)
+ * - Wrong digit
  * - Get line
  * - Wrong line
  * - Get cell
  * - Wrong cell
- * - Parse number (test for each 1..9)
- * - Wrong number
  * - Get numbers
  * - Aceptance
  */
 
-
+TEST(BankOcr, MachineDigitToString0)
+{
+    ASSERT_("0", ParseNumberCell(" _ | ||_|"));
+}
