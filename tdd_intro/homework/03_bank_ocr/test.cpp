@@ -99,7 +99,12 @@ Example input and output
  * - Aceptance
  */
 
+std::string ParseNumberCell(const std::string &str)
+{
+    return "0";
+}
+
 TEST(BankOcr, MachineDigitToString0)
 {
-    ASSERT_("0", ParseNumberCell(" _ | ||_|"));
+    ASSERT_EQ("0", ParseNumberCell(" _ | ||_|"));
 }
