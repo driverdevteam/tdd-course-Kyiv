@@ -128,7 +128,11 @@ std::string ParseNumberCell(const std::string &str)
 
 std::string GetDigitCell(const std::string &str)
 {
-    return ZERO_DIGIT;
+    std::string number = str.substr(0, 3);
+    number += str.substr(27, 3);
+    number += str.substr(54, 3);
+
+    return number;
 }
 
 TEST(BankOcr, MachineDigitToString0)
@@ -188,10 +192,10 @@ TEST(BankOcr, MachineDigitToString9)
 
 TEST(BankOcr, GetFirstLineDigitZero)
 {
-    ASSERT_EQ(ZERO_DIGIT, GetDigitCell(ZERO_DIGIT + ONE_DIGIT + TWO_DIGIT + THREE_DIGIT + FOUR_DIGIT + FIVE_DIGIT + SIX_DIGIT + SEVEN_DIGIT + EIGHT_DIGIT));
+    ASSERT_EQ(ZERO_DIGIT, GetDigitCell(" _  _  _  _  _  _  _  _  _ | || || || || || || || || ||_||_||_||_||_||_||_||_||_|"));
 }
 
 TEST(BankOcr, GetFirstLineDigitOne)
 {
-    ASSERT_EQ(ONE_DIGIT, GetDigitCell(ONE_DIGIT + TWO_DIGIT + THREE_DIGIT + FOUR_DIGIT + FIVE_DIGIT + SIX_DIGIT + SEVEN_DIGIT + EIGHT_DIGIT + NINE_DIGIT));
+    ASSERT_EQ(ONE_DIGIT, GetDigitCell("                             |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |"));
 }
