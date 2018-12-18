@@ -223,3 +223,8 @@ TEST(BankOcr, GetSecondLineDigitFive)
 {
     ASSERT_EQ(FIVE_DIGIT, GetDigitCell(" _  _  _  _  _  _  _  _  _ |_ |_ |_ |_ |_ |_ |_ |_ |_  _| _| _| _| _| _| _| _| _|" , 2));
 }
+
+TEST(BankOcr, GetWrongIndexDigit)
+{
+    ASSERT_EQ("", GetDigitCell(" _  _  _  _  _  _  _  _  _ |_ |_ |_ |_ |_ |_ |_ |_ |_  _| _| _| _| _| _| _| _| _|" , 10));
+}
