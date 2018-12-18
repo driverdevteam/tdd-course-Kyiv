@@ -100,10 +100,28 @@ Example input and output
  */
 
 const std::string ZERO_DIGIT = " _ | ||_|";
+const std::string ONE_DIGIT = "     |  |";
+const std::string TWO_DIGIT = " _  _||_ ";
+const std::string THREE_DIGIT = " _  _| _|";
+const std::string FOUR_DIGIT = "   |_|  |";
+const std::string FIVE_DIGIT = " _ |_  _|";
+const std::string SIX_DIGIT = " _ |_ |_|";
+const std::string SEVEN_DIGIT = " _   |  |";
+const std::string EIGHT_DIGIT = " _ |_||_|";
+const std::string NINE_DIGIT = " _ |_| _|";
 
 std::string ParseNumberCell(const std::string &str)
 {
     if (str == ZERO_DIGIT) return "0";
+    if (str == ONE_DIGIT) return "1";
+    if (str == TWO_DIGIT) return "2";
+    if (str == THREE_DIGIT) return "3";
+    if (str == FOUR_DIGIT) return "4";
+    if (str == FIVE_DIGIT) return "5";
+    if (str == SIX_DIGIT) return "6";
+    if (str == SEVEN_DIGIT) return "7";
+    if (str == EIGHT_DIGIT) return "8";
+    if (str == NINE_DIGIT) return "9";
 
     return "";
 }
@@ -116,4 +134,49 @@ TEST(BankOcr, MachineDigitToString0)
 TEST(BankOcr, MachineWrongDigitToString)
 {
     ASSERT_EQ("", ParseNumberCell("_---__--"));
+}
+
+TEST(BankOcr, MachineDigitToString1)
+{
+    ASSERT_EQ("1", ParseNumberCell(ONE_DIGIT));
+}
+
+TEST(BankOcr, MachineDigitToString2)
+{
+    ASSERT_EQ("2", ParseNumberCell(TWO_DIGIT));
+}
+
+TEST(BankOcr, MachineDigitToString3)
+{
+    ASSERT_EQ("3", ParseNumberCell(THREE_DIGIT));
+}
+
+TEST(BankOcr, MachineDigitToString4)
+{
+    ASSERT_EQ("4", ParseNumberCell(FOUR_DIGIT));
+}
+
+TEST(BankOcr, MachineDigitToString5)
+{
+    ASSERT_EQ("5", ParseNumberCell(FIVE_DIGIT));
+}
+
+TEST(BankOcr, MachineDigitToString6)
+{
+    ASSERT_EQ("6", ParseNumberCell(SIX_DIGIT));
+}
+
+TEST(BankOcr, MachineDigitToString7)
+{
+    ASSERT_EQ("7", ParseNumberCell(SEVEN_DIGIT));
+}
+
+TEST(BankOcr, MachineDigitToString8)
+{
+    ASSERT_EQ("8", ParseNumberCell(EIGHT_DIGIT));
+}
+
+TEST(BankOcr, MachineDigitToString9)
+{
+    ASSERT_EQ("9", ParseNumberCell(NINE_DIGIT));
 }
