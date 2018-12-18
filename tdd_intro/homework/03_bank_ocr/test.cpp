@@ -152,7 +152,15 @@ std::string GetDigitCell(const std::string &str, unsigned int digitIndex)
 
 std::string GetNumbers(const std::string &machineNumber)
 {
-    return "123456789";
+    std::string parsedNumbers;
+    for (unsigned int index = 0; index < 9; index++)
+    {
+        std::string number = GetDigitCell(machineNumber, index + 1);
+        std::string parsedNumber = ParseNumberCell(number);
+        parsedNumbers += parsedNumber;
+    }
+
+    return parsedNumbers;
 }
 
 TEST(BankOcr, MachineDigitToString0)
