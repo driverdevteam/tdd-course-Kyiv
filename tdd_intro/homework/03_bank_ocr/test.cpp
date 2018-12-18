@@ -180,3 +180,8 @@ TEST(BankOcr, MachineDigitToString9)
 {
     ASSERT_EQ("9", ParseNumberCell(NINE_DIGIT));
 }
+
+TEST(BankOcr, GetFirstLineDigitZero)
+{
+    ASSERT_EQ(ZERO_DIGIT, GetDigitCell(ZERO_DIGIT + ONE_DIGIT + TWO_DIGIT + THREE_DIGIT + FOUR_DIGIT + FIVE_DIGIT + SIX_DIGIT + SEVEN_DIGIT + EIGHT_DIGIT));
+}
