@@ -116,6 +116,7 @@ const unsigned int DIGIT_SECOND_LINE_INDEX = 27;
 const unsigned int DIGIT_THIRD_LINE_INDEX = 54;
 
 const unsigned int MACHINE_LINE_LENGTH = 81;
+const unsigned int MAX_DIGIT_INDEX = 9;
 
 std::string ParseNumberCell(const std::string &str)
 {
@@ -135,7 +136,7 @@ std::string ParseNumberCell(const std::string &str)
 
 std::string GetDigitCell(const std::string &str, unsigned int digitIndex)
 {
-    if (str.size() != MACHINE_LINE_LENGTH || digitIndex > 9)
+    if (str.size() != MACHINE_LINE_LENGTH || digitIndex > MAX_DIGIT_INDEX)
     {
         return "";
     }
