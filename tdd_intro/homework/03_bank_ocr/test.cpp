@@ -235,3 +235,10 @@ TEST(BankOCR, CheckDigitTwo)
 {
     ASSERT_EQ(2, ConvertDigit(s_digit2));
 }
+
+TEST(BankOCR, CheckDigitThree)
+{
+    ASSERT_EQ(3, ConvertDigit(s_digit3));
+}
+
+
