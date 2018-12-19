@@ -210,42 +210,53 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
 
 int ConvertDigit(const Digit &digit)
 {
-    if (digit.lines[0] == "   ")
+    std::string high = digit.lines[0];
+    std::string mid = digit.lines[1];
+    std::string low = digit.lines[2];
+
+    int mask = high.at(1) == '_' ? 1 : 0;
+    mask += mid.at(0) == '|' ? 2 : 0;
+    mask += mid.at(1) == '_' ? 4 : 0;
+    mask += mid.at(2) == '|' ? 8 : 0;
+    mask += low.at(0) == '|' ? 16 : 0;
+
+    // 1 - 01000 - 8
+    // 2 - 11101 - 29
+    // 3 - 01101 - 13
+    // 4 - 01110 - 14
+    // 5 - 00111 - 7
+    // 6 - 10111 - 23
+    // 7 - 01001 - 9
+    // 8 - 11111 - 31
+    // 9 - 01111 - 15
+    // 0 - 11011 - 27
+
+    switch(mask)
     {
-        if (digit.lines[1] == "|_|")
-        {
-            return 4;
-        }
+    case 8:
         return 1;
+    case 29:
+        return 2;
+    case 13:
+        return 3;
+    case 14:
+        return 4;
+    case 7:
+        return 5;
+    case 23:
+        return 6;
+    case 9:
+        return 7;
+    case 31:
+        return 8;
+    case 15:
+        return 9;
+    case 27:
+        return 0;
+
+    default:
+        return mask;
     }
-    else
-    {
-        if (digit.lines[1] == " _|")
-        {
-            if (digit.lines[2] == " _|")
-            {
-                return 3;
-            }
-            return 2;
-        }
-        else if (digit.lines[1] == "|_ ")
-        {
-            if (digit.lines[2] == "|_|")
-            {
-                return 6;
-            }
-            return 5;
-        }
-        else if (digit.lines[1] == "| |")
-        {
-            return 0;
-        }
-        else if (digit.lines[1] == "|_|")
-        {
-            return 8;
-        }
-    }
-    return 7;
 }
 
 TEST(BankOCR, CheckDigitZero)
