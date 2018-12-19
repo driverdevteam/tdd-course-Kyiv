@@ -328,3 +328,9 @@ TEST(BankOCR, CheckIncorectDigits)
     EXPECT_THROW(ConvertDigit(s_incorrectDigit2), std::runtime_error);
     EXPECT_THROW(ConvertDigit(s_incorrectDigit3), std::runtime_error);
 }
+
+
+TEST(BankOCR, CheckNumberAll0)
+{
+    ASSERT_EQ(000000000, ConvertNumber(s_displayAll0));
+}
