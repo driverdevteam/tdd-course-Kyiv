@@ -279,7 +279,7 @@ int ConvertNumber(const Display &number)
     for(int i = 0; i < g_digitsOnDisplay; ++i)
     {
         int position = i * g_digitLen;
-        int multiplier = std::pow(10, i);
+        int multiplier = std::pow(10, g_digitsOnDisplay - i - 1);
         result += multiplier * ConvertDigit({std::string(number.lines[0].c_str() + position),
                                              std::string(number.lines[1].c_str() + position),
                                              std::string(number.lines[2].c_str() + position)});
