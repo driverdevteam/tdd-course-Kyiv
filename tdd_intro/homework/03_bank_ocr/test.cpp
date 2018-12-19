@@ -230,6 +230,10 @@ int ConvertDigit(const Digit &digit)
         }
         else if (digit.lines[1] == "|_ ")
         {
+            if (digit.lines[2] == "|_|")
+            {
+                return 6;
+            }
             return 5;
         }
     }
@@ -264,4 +268,9 @@ TEST(BankOCR, CheckDigitFour)
 TEST(BankOCR, CheckDigitFive)
 {
     ASSERT_EQ(5, ConvertDigit(s_digit5));
+}
+
+TEST(BankOCR, CheckDigitSix)
+{
+    ASSERT_EQ(6, ConvertDigit(s_digit6));
 }
