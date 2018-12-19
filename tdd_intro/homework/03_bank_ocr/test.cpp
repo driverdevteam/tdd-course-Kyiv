@@ -208,7 +208,12 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
  *13) acceptance test
  */
 
+int ConvertDigit(const Digit &digit)
+{
+    return 0;
+}
+
 TEST(BankOCR, CheckZeroDigit)
 {
-    ASSERT_EQ(0, ConverDigit(s_digit0));
+    ASSERT_EQ(0, ConvertDigit(s_digit0));
 }
