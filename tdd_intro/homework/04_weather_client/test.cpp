@@ -46,3 +46,36 @@ IMPORTANT:
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
+
+struct Weather
+{
+    short temperature = 0;
+    unsigned short windDirection = 0;
+    double windSpeed = 0;
+    bool operator==(const Weather& right)
+    {
+        return temperature == right.temperature &&
+               windDirection == right.windDirection &&
+               std::abs(windSpeed - right.windSpeed) < 0.01;
+    }
+};
+
+class IWeatherServer
+{
+public:
+    virtual ~IWeatherServer() { }
+    // Returns raw response with weather for the given day and time in request
+    virtual std::string GetWeather(const std::string& request) = 0;
+};
+
+// Implement this interface
+class IWeatherClient
+{
+public:
+    virtual ~IWeatherClient() { }
+    virtual double GetAverageTemperature(IWeatherServer& server, const std::string& date) = 0;
+    virtual double GetMinimumTemperature(IWeatherServer& server, const std::string& date) = 0;
+    virtual double GetMaximumTemperature(IWeatherServer& server, const std::string& date) = 0;
+    virtual double GetAverageWindDirection(IWeatherServer& server, const std::string& date) = 0;
+    virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date) = 0;
+};
