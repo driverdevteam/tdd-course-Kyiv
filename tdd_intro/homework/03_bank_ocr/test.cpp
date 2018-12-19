@@ -212,6 +212,10 @@ int ConvertDigit(const Digit &digit)
 {
     if (digit.lines[0] == "   ")
     {
+        if (digit.lines[1] == "|_|")
+        {
+            return 4;
+        }
         return 1;
     }
     else if (digit.lines[1] == " _|")
