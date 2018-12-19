@@ -236,8 +236,13 @@ int ConvertDigit(const Digit &digit)
             }
             return 5;
         }
-        else if (digit.lines[1] == "| |") {
+        else if (digit.lines[1] == "| |")
+        {
             return 0;
+        }
+        else if (digit.lines[1] == "|_|")
+        {
+            return 8;
         }
     }
     return 7;
