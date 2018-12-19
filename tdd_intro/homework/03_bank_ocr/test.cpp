@@ -207,3 +207,8 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
  *12) check 9 random symbols
  *13) acceptance test
  */
+
+TEST(BankOCR, CheckZeroDigit)
+{
+    ASSERT_EQ(0, ConverDigit(s_digit0));
+}
