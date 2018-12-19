@@ -140,6 +140,18 @@ const Digit s_digit9 = { " _ ",
                          "|_|",
                          " _|"
                        };
+const Digit s_incorrectDigit1 = { "   ",
+                                  "|_|",
+                                  " _|"
+                                };
+const Digit s_incorrectDigit2 = { "   ",
+                                  "| |",
+                                  "|_|"
+                                };
+const Digit s_incorrectDigit3 = { " _ ",
+                                  "|_|",
+                                  "| |"
+                                };
 
 const Display s_displayAll0 = { " _  _  _  _  _  _  _  _  _ ",
                                 "| || || || || || || || || |",
@@ -219,43 +231,44 @@ int ConvertDigit(const Digit &digit)
     mask += mid.at(1) == '_' ? 4 : 0;
     mask += mid.at(2) == '|' ? 8 : 0;
     mask += low.at(0) == '|' ? 16 : 0;
+    mask += low.at(1) == '_' ? 32 : 0;
 
-    // 1 - 01000 - 8
-    // 2 - 11101 - 29
-    // 3 - 01101 - 13
-    // 4 - 01110 - 14
-    // 5 - 00111 - 7
-    // 6 - 10111 - 23
-    // 7 - 01001 - 9
-    // 8 - 11111 - 31
-    // 9 - 01111 - 15
-    // 0 - 11011 - 27
+    // 1 - 001000 - 8
+    // 2 - 111101 - 61
+    // 3 - 101101 - 45
+    // 4 - 001110 - 14
+    // 5 - 100111 - 39
+    // 6 - 110111 - 55
+    // 7 - 001001 - 9
+    // 8 - 111111 - 63
+    // 9 - 101111 - 47
+    // 0 - 111011 - 59
 
     switch(mask)
     {
     case 8:
         return 1;
-    case 29:
+    case 61:
         return 2;
-    case 13:
+    case 45:
         return 3;
     case 14:
         return 4;
-    case 7:
+    case 39:
         return 5;
-    case 23:
+    case 55:
         return 6;
     case 9:
         return 7;
-    case 31:
+    case 63:
         return 8;
-    case 15:
+    case 47:
         return 9;
-    case 27:
+    case 59:
         return 0;
 
     default:
-        return mask;
+        throw std::runtime_error("Unknown symbol found");
     }
 }
 
@@ -307,4 +320,11 @@ TEST(BankOCR, CheckDigitEight)
 TEST(BankOCR, CheckDigitNine)
 {
     ASSERT_EQ(9, ConvertDigit(s_digit9));
+}
+
+TEST(BankOCR, CheckIncorectDigits)
+{
+    EXPECT_THROW(ConvertDigit(s_incorrectDigit1), std::runtime_error);
+    EXPECT_THROW(ConvertDigit(s_incorrectDigit2), std::runtime_error);
+    EXPECT_THROW(ConvertDigit(s_incorrectDigit3), std::runtime_error);
 }
