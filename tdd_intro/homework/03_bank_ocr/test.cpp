@@ -86,6 +86,7 @@ Example input and output
 */
 #include <gtest/gtest.h>
 #include <string>
+#include <cmath>
 
 const unsigned short g_digitLen = 3;
 const unsigned short g_linesInDigit = 3;
@@ -271,6 +272,21 @@ int ConvertDigit(const Digit &digit)
         throw std::runtime_error("Unknown symbol found");
     }
 }
+
+int ConvertNumber(const Display &number)
+{
+    int result = 0;
+    for(int i = 0; i < g_digitsOnDisplay; ++i)
+    {
+        int position = i * g_digitLen;
+        int multiplier = std::pow(10, i);
+        result += multiplier * ConvertDigit({std::string(number.lines[0].c_str() + position),
+                                             std::string(number.lines[1].c_str() + position),
+                                             std::string(number.lines[2].c_str() + position)});
+    }
+    return result;
+}
+
 
 TEST(BankOCR, CheckDigitZero)
 {
