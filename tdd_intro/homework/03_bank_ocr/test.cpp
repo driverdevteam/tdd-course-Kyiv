@@ -210,6 +210,10 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
 
 int ConvertDigit(const Digit &digit)
 {
+    if (digit.lines[0] == "   ")
+    {
+        return 1;
+    }
     return 0;
 }
 
