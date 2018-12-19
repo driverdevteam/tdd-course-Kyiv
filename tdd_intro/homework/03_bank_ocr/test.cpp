@@ -218,13 +218,20 @@ int ConvertDigit(const Digit &digit)
         }
         return 1;
     }
-    else if (digit.lines[1] == " _|")
+    else
     {
-        if (digit.lines[2] == " _|")
+        if (digit.lines[1] == " _|")
         {
-            return 3;
+            if (digit.lines[2] == " _|")
+            {
+                return 3;
+            }
+            return 2;
         }
-        return 2;
+        else
+        {
+            return 5;
+        }
     }
     return 0;
 }
