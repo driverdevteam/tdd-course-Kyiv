@@ -195,3 +195,15 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
                                      "  | _| _||_||_ |_   ||_||_|",
                                      "  ||_  _|  | _||_|  ||_| _|"
 };
+
+/*
+ *test list
+ *1) check strings with single digit 0
+ *2) check strings with single digit 1
+ *...
+ *10) check strings with single digit 9
+ *11) check incorrect symbol
+ *11) check 9 similar symbols
+ *12) check 9 random symbols
+ *13) acceptance test
+ */
