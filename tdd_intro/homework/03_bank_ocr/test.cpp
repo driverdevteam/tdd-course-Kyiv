@@ -236,8 +236,11 @@ int ConvertDigit(const Digit &digit)
             }
             return 5;
         }
+        else if (digit.lines[1] == "| |") {
+            return 0;
+        }
     }
-    return 0;
+    return 7;
 }
 
 TEST(BankOCR, CheckDigitZero)
