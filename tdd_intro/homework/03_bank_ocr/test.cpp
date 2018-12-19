@@ -209,6 +209,11 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
                                      "  ||_  _|  | _||_|  ||_| _|"
 };
 
+const Display s_display234432234 = { " _  _        _  _  _  _    ",
+                                     " _| _||_||_| _| _| _| _||_|",
+                                     "|_  _|  |  | _||_ |_  _|  |"
+};
+
 /*
  *test list
  *1) check strings with single digit 0
@@ -399,4 +404,9 @@ TEST(BankOCR, CheckNumberAll9)
 TEST(BankOCR, CheckNumberAll123456789)
 {
     ASSERT_EQ(123456789, ConvertNumber(s_display123456789));
+}
+
+TEST(BankOCR, Acceptance)
+{
+    ASSERT_EQ(234432234, ConvertNumber(s_display234432234));
 }
