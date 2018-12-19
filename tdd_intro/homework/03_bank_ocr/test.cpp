@@ -213,7 +213,12 @@ int ConvertDigit(const Digit &digit)
     return 0;
 }
 
-TEST(BankOCR, CheckZeroDigit)
+TEST(BankOCR, CheckDigitZero)
 {
     ASSERT_EQ(0, ConvertDigit(s_digit0));
+}
+
+TEST(BankOCR, CheckDigitOne)
+{
+    ASSERT_EQ(1, ConvertDigit(s_digit1));
 }
