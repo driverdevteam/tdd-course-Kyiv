@@ -274,3 +274,8 @@ TEST(BankOCR, CheckDigitSix)
 {
     ASSERT_EQ(6, ConvertDigit(s_digit6));
 }
+
+TEST(BankOCR, CheckDigitSeven)
+{
+    ASSERT_EQ(7, ConvertDigit(s_digit7));
+}
