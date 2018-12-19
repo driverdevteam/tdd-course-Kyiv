@@ -350,3 +350,53 @@ TEST(BankOCR, CheckNumberAll0)
 {
     ASSERT_EQ(000000000, ConvertNumber(s_displayAll0));
 }
+
+TEST(BankOCR, CheckNumberAll1)
+{
+    ASSERT_EQ(111111111, ConvertNumber(s_displayAll1));
+}
+
+TEST(BankOCR, CheckNumberAll2)
+{
+    ASSERT_EQ(222222222, ConvertNumber(s_displayAll2));
+}
+
+TEST(BankOCR, CheckNumberAll3)
+{
+    ASSERT_EQ(333333333, ConvertNumber(s_displayAll3));
+}
+
+TEST(BankOCR, CheckNumberAll4)
+{
+    ASSERT_EQ(444444444, ConvertNumber(s_displayAll4));
+}
+
+TEST(BankOCR, CheckNumberAll5)
+{
+    ASSERT_EQ(555555555, ConvertNumber(s_displayAll5));
+}
+
+TEST(BankOCR, CheckNumberAll6)
+{
+    ASSERT_EQ(666666666, ConvertNumber(s_displayAll6));
+}
+
+TEST(BankOCR, CheckNumberAll7)
+{
+    ASSERT_EQ(777777777, ConvertNumber(s_displayAll7));
+}
+
+TEST(BankOCR, CheckNumberAll8)
+{
+    ASSERT_EQ(888888888, ConvertNumber(s_displayAll8));
+}
+
+TEST(BankOCR, CheckNumberAll9)
+{
+    ASSERT_EQ(999999999, ConvertNumber(s_displayAll9));
+}
+
+TEST(BankOCR, CheckNumberAll123456789)
+{
+    ASSERT_EQ(123456789, ConvertNumber(s_display123456789));
+}
