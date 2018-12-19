@@ -228,7 +228,7 @@ int ConvertDigit(const Digit &digit)
             }
             return 2;
         }
-        else
+        else if (digit.lines[1] == "|_ ")
         {
             return 5;
         }
