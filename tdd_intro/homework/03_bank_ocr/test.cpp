@@ -245,4 +245,8 @@ TEST(BankOCR, CheckDigitThree)
     ASSERT_EQ(3, ConvertDigit(s_digit3));
 }
 
+TEST(BankOCR, CheckDigitFour)
+{
+    ASSERT_EQ(4, ConvertDigit(s_digit4));
+}
 
