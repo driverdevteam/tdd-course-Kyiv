@@ -226,3 +226,8 @@ TEST(BankOCR, CheckDigitOne)
 {
     ASSERT_EQ(1, ConvertDigit(s_digit1));
 }
+
+TEST(BankOCR, CheckDigitTwo)
+{
+    ASSERT_EQ(2, ConvertDigit(s_digit2));
+}
