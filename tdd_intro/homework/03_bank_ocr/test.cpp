@@ -282,3 +282,8 @@ TEST(BankOCR, CheckDigitSeven)
 {
     ASSERT_EQ(7, ConvertDigit(s_digit7));
 }
+
+TEST(BankOCR, CheckDigitEight)
+{
+    ASSERT_EQ(8, ConvertDigit(s_digit8));
+}
