@@ -292,3 +292,8 @@ TEST(BankOCR, CheckDigitEight)
 {
     ASSERT_EQ(8, ConvertDigit(s_digit8));
 }
+
+TEST(BankOCR, CheckDigitNine)
+{
+    ASSERT_EQ(9, ConvertDigit(s_digit9));
+}
