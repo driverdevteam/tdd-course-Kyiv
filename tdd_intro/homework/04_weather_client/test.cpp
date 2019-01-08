@@ -354,3 +354,14 @@ TEST(WeatherClient, GetAverageWindDirectionFor31_08_2018)
 
     ASSERT_FLOAT_EQ(189.25, client.GetAverageWindDirection(server, "31.08.2018"));
 }
+
+TEST(WeatherClient, GetAverageWindDirectionAcceptence)
+{
+    WeatherServerStub server;
+    WeatherClient client;
+
+    ASSERT_FLOAT_EQ(135.75f, client.GetAverageWindDirection(server, "01.09.2018"));
+    ASSERT_FLOAT_EQ(229.0f, client.GetAverageWindDirection(server, "02.09.2018"));
+    EXPECT_THROW(client.GetAverageWindDirection(server, "sdsdfdf"), std::runtime_error);
+    EXPECT_ANY_THROW(client.GetAverageWindDirection(server, "01.11.2018")); // Использовал этот метод, почему то 2 метода EXPECT_THROW не компилируются в одном методе...
+}
