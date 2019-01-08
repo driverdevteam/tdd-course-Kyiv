@@ -152,27 +152,36 @@ Weather ParseWeather(const std::string &data)
     {
         throw std::runtime_error("");
     }
+
     Weather weather;
     std::istringstream stream(data);
 
-    stream >> weather.temperature;
-    if (stream.fail())
+    for (unsigned int operationIndex = 0; operationIndex < 3; ++operationIndex)
     {
-        throw std::runtime_error("");
-    }
+        switch (operationIndex)
+        {
+        case 0:
+            stream >> weather.temperature;
+            break;
 
-    stream.ignore();
-    stream >> weather.windDirection;
-    if (stream.fail())
-    {
-        throw std::runtime_error("");
-    }
+        case 1:
+            stream >> weather.windDirection;
+            break;
 
-    stream.ignore();
-    stream >> weather.windSpeed;
-    if (stream.fail())
-    {
-        throw std::runtime_error("");
+        case 2:
+            stream >> weather.windSpeed;
+            break;
+
+         default:
+            break;
+        }
+
+        if (stream.fail())
+        {
+            throw std::runtime_error("");
+        }
+
+        stream.ignore();
     }
 
     return weather;
