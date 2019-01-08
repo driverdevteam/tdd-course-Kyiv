@@ -390,3 +390,14 @@ TEST(WeatherClient, GetMaximumWindSpeedFor31_08_2018)
 
     ASSERT_FLOAT_EQ(5.1f, client.GetMaximumWindSpeed(server, "31.08.2018"));
 }
+
+TEST(WeatherClient, GetMaximumWindSpeedAcceptence)
+{
+    WeatherServerStub server;
+    WeatherClient client;
+
+    ASSERT_FLOAT_EQ(4.2f, client.GetMaximumWindSpeed(server, "01.09.2018"));
+    ASSERT_FLOAT_EQ(4.0f, client.GetMaximumWindSpeed(server, "02.09.2018"));
+    EXPECT_THROW(client.GetMaximumWindSpeed(server, "sdsdfdf"), std::runtime_error);
+    EXPECT_ANY_THROW(client.GetMaximumWindSpeed(server, "01.11.2018")); // Использовал этот метод, почему то 2 метода EXPECT_THROW не компилируются в одном методе...
+}
