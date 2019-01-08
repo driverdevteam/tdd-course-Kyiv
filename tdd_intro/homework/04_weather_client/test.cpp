@@ -257,4 +257,6 @@ TEST(WeatherClient, GetAverageTemperatureAcceptence)
 
     ASSERT_FLOAT_EQ(24.0f, client.GetAverageTemperature(server, "01.09.2018"));
     ASSERT_FLOAT_EQ(26.75f, client.GetAverageTemperature(server, "02.09.2018"));
+    EXPECT_THROW(client.GetAverageTemperature(server, "sdsdfdf"), std::runtime_error);
+    EXPECT_ANY_THROW(client.GetAverageTemperature(server, "01.11.2018")); // Использовал этот метод, почему то 2 метода EXPECT_THROW не компилируются в одном методе...
 }
