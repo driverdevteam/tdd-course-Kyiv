@@ -249,3 +249,12 @@ TEST(WeatherClient, GetAverageTemperatureFor31_08_2018)
 
     ASSERT_FLOAT_EQ(25.5f, client.GetAverageTemperature(server, "31.08.2018"));
 }
+
+TEST(WeatherClient, GetAverageTemperatureAcceptence)
+{
+    WeatherServerStub server;
+    WeatherClient client;
+
+    ASSERT_FLOAT_EQ(24.0f, client.GetAverageTemperature(server, "01.09.2018"));
+    ASSERT_FLOAT_EQ(26.75f, client.GetAverageTemperature(server, "02.09.2018"));
+}
