@@ -192,6 +192,23 @@ public:
 
         return static_cast<double>(result)/4;
     }
+
+    double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date)
+    {
+        std::vector<double> speeds;
+
+        std::string response = server.GetWeather(date + ";03:00");
+        speeds.push_back(ParseWeather(response).windSpeed);
+        response = server.GetWeather(date + ";09:00");
+        speeds.push_back(ParseWeather(response).windSpeed);
+        response = server.GetWeather(date + ";15:00");
+        speeds.push_back(ParseWeather(response).windSpeed);
+        response = server.GetWeather(date + ";21:00");
+        speeds.push_back(ParseWeather(response).windSpeed);
+
+        std::vector<double>::iterator result = std::max_element(std::begin(speeds), std::end(speeds));
+        return *result;
+    }
 };
 
 Weather ParseWeather(const std::string &data)
