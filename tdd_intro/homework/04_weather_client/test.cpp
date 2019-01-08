@@ -66,6 +66,13 @@ IMPORTANT:
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
+class Weather;
+
+using WeatherVector = std::vector<Weather>;
+using WeatherMap = std::map<std::string, std::string>;
+using TemperatureVector = std::vector<short>;
+using WindSpeedVector = std::vector<double>;
+
 struct Weather
 {
     short temperature = 0;
@@ -96,7 +103,7 @@ public:
     virtual short GetMinimumTemperature(IWeatherServer& server, const std::string& date) = 0;
     virtual short GetMaximumTemperature(IWeatherServer& server, const std::string& date) = 0;
     virtual double GetAverageWindDirection(IWeatherServer& server, const std::string& date) = 0;
-//    virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date) = 0;
+    virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date) = 0;
 };
 
 class WeatherServerStub : public IWeatherServer
@@ -104,7 +111,7 @@ class WeatherServerStub : public IWeatherServer
 public:
     std::string GetWeather(const std::string& request)
     {
-        static std::map<std::string, std::string> weatherMap = {{"31.08.2018;03:00" , "20;181;5.1"},
+        static WeatherMap weatherMap = {{"31.08.2018;03:00" , "20;181;5.1"},
                                                                 {"31.08.2018;09:00" , "23;204;4.9"},
                                                                 {"31.08.2018;15:00" , "33;193;4.3"},
                                                                 {"31.08.2018;21:00" , "26;179;4.5"},
@@ -131,7 +138,6 @@ public:
     {
         double result = 0;
 
-
         std::string response = server.GetWeather(date + ";03:00");
         result += ParseWeather(response).temperature;
         response = server.GetWeather(date + ";09:00");
@@ -140,14 +146,13 @@ public:
         result += ParseWeather(response).temperature;
         response = server.GetWeather(date + ";21:00");
         result += ParseWeather(response).temperature;
-
 
         return result/4;
     }
 
     short GetMinimumTemperature(IWeatherServer& server, const std::string& date)
     {
-        std::vector<short> temps;
+        TemperatureVector temps;
         std::string response = server.GetWeather(date + ";03:00");
         temps.push_back(ParseWeather(response).temperature);
         response = server.GetWeather(date + ";09:00");
@@ -157,13 +162,13 @@ public:
         response = server.GetWeather(date + ";21:00");
         temps.push_back(ParseWeather(response).temperature);
 
-        std::vector<short>::iterator result = std::min_element(std::begin(temps), std::end(temps));
+        TemperatureVector::iterator result = std::min_element(std::begin(temps), std::end(temps));
         return *result;
     }
 
     short GetMaximumTemperature(IWeatherServer& server, const std::string& date)
     {
-        std::vector<short> temps;
+        TemperatureVector temps;
         std::string response = server.GetWeather(date + ";03:00");
         temps.push_back(ParseWeather(response).temperature);
         response = server.GetWeather(date + ";09:00");
@@ -173,7 +178,7 @@ public:
         response = server.GetWeather(date + ";21:00");
         temps.push_back(ParseWeather(response).temperature);
 
-        std::vector<short>::iterator result = std::max_element(std::begin(temps), std::end(temps));
+        TemperatureVector::iterator result = std::max_element(std::begin(temps), std::end(temps));
         return *result;
     }
 
@@ -195,7 +200,7 @@ public:
 
     double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date)
     {
-        std::vector<double> speeds;
+        WindSpeedVector speeds;
 
         std::string response = server.GetWeather(date + ";03:00");
         speeds.push_back(ParseWeather(response).windSpeed);
@@ -206,7 +211,7 @@ public:
         response = server.GetWeather(date + ";21:00");
         speeds.push_back(ParseWeather(response).windSpeed);
 
-        std::vector<double>::iterator result = std::max_element(std::begin(speeds), std::end(speeds));
+        WindSpeedVector::iterator result = std::max_element(std::begin(speeds), std::end(speeds));
         return *result;
     }
 };
@@ -252,9 +257,9 @@ Weather ParseWeather(const std::string &data)
     return weather;
 }
 
-std::vector<Weather> ParseWeather(const std::vector<std::string> &response)
+WeatherVector ParseWeather(const std::vector<std::string> &response)
 {
-    std::vector<Weather> result;
+    WeatherVector result;
     for (auto data : response)
     {
         Weather weather = ParseWeather(data);
@@ -303,7 +308,7 @@ TEST(WeatherClient, CheckParsingMultipleStrings)
     wether2.windDirection = 193;
     wether2.windSpeed = 4.3f;
 
-    std::vector<Weather> result = {wether0, wether1, wether2};
+    WeatherVector result = {wether0, wether1, wether2};
     ASSERT_EQ(result , ParseWeather(response));
 }
 
