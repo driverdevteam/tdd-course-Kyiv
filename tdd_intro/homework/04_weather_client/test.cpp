@@ -308,8 +308,8 @@ TEST(WeatherClient, GetMinimumTemperatureAcceptence)
 
     ASSERT_EQ(19, client.GetMinimumTemperature(server, "01.09.2018"));
     ASSERT_EQ(21, client.GetMinimumTemperature(server, "02.09.2018"));
-    EXPECT_THROW(client.GetAverageTemperature(server, "sdsdfdf"), std::runtime_error);
-    EXPECT_ANY_THROW(client.GetAverageTemperature(server, "01.11.2018")); // Использовал этот метод, почему то 2 метода EXPECT_THROW не компилируются в одном методе...
+    EXPECT_THROW(client.GetMinimumTemperature(server, "sdsdfdf"), std::runtime_error);
+    EXPECT_ANY_THROW(client.GetMinimumTemperature(server, "01.11.2018")); // Использовал этот метод, почему то 2 метода EXPECT_THROW не компилируются в одном методе...
 }
 
 TEST(WeatherClient, GetMaximumTemperatureFor31_08_2018)
@@ -318,4 +318,15 @@ TEST(WeatherClient, GetMaximumTemperatureFor31_08_2018)
     WeatherClient client;
 
     ASSERT_EQ(33, client.GetMaximumTemperature(server, "31.08.2018"));
+}
+
+TEST(WeatherClient, GetMaximumTemperatureAcceptence)
+{
+    WeatherServerStub server;
+    WeatherClient client;
+
+    ASSERT_EQ(31, client.GetMaximumTemperature(server, "01.09.2018"));
+    ASSERT_EQ(34, client.GetMaximumTemperature(server, "02.09.2018"));
+    EXPECT_THROW(client.GetMaximumTemperature(server, "sdsdfdf"), std::runtime_error);
+    EXPECT_ANY_THROW(client.GetMaximumTemperature(server, "01.11.2018")); // Использовал этот метод, почему то 2 метода EXPECT_THROW не компилируются в одном методе...
 }
