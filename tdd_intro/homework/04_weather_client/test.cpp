@@ -93,7 +93,7 @@ class IWeatherClient
 public:
     virtual ~IWeatherClient() { }
     virtual double GetAverageTemperature(IWeatherServer& server, const std::string& date) = 0;
-//    virtual double GetMinimumTemperature(IWeatherServer& server, const std::string& date) = 0;
+    virtual short GetMinimumTemperature(IWeatherServer& server, const std::string& date) = 0;
 //    virtual double GetMaximumTemperature(IWeatherServer& server, const std::string& date) = 0;
 //    virtual double GetAverageWindDirection(IWeatherServer& server, const std::string& date) = 0;
 //    virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date) = 0;
@@ -143,6 +143,22 @@ public:
 
 
         return result/4;
+    }
+
+    short GetMinimumTemperature(IWeatherServer& server, const std::string& date)
+    {
+        std::vector<short> temps;
+        std::string response = server.GetWeather(date + ";03:00");
+        temps.push_back(ParseWeather(response).temperature);
+        response = server.GetWeather(date + ";09:00");
+        temps.push_back(ParseWeather(response).temperature);
+        response = server.GetWeather(date + ";15:00");
+        temps.push_back(ParseWeather(response).temperature);
+        response = server.GetWeather(date + ";21:00");
+        temps.push_back(ParseWeather(response).temperature);
+
+        std::vector<short>::iterator result = std::min_element(std::begin(temps), std::end(temps));
+        return *result;
     }
 };
 
@@ -266,5 +282,5 @@ TEST(WeatherClient, GetMinimumTemperatureFor31_08_2018)
     WeatherServerStub server;
     WeatherClient client;
 
-    ASSERT_FLOAT_EQ(25.5f, client.GetMinimumTemperature(server, "31.08.2018"));
+    ASSERT_EQ(20, client.GetMinimumTemperature(server, "31.08.2018"));
 }
