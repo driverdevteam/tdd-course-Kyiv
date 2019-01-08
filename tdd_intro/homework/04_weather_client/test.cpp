@@ -295,3 +295,11 @@ TEST(WeatherClient, GetMinimumTemperatureAcceptence)
     EXPECT_THROW(client.GetAverageTemperature(server, "sdsdfdf"), std::runtime_error);
     EXPECT_ANY_THROW(client.GetAverageTemperature(server, "01.11.2018")); // Использовал этот метод, почему то 2 метода EXPECT_THROW не компилируются в одном методе...
 }
+
+TEST(WeatherClient, GetMaximumTemperatureFor31_08_2018)
+{
+    WeatherServerStub server;
+    WeatherClient client;
+
+    ASSERT_EQ(33, client.GetMaximumTemperature(server, "31.08.2018"));
+}
