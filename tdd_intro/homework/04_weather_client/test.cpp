@@ -191,6 +191,11 @@ TEST(WeatherClient, CheckParsingValidString)
     ASSERT_EQ(wether, ParseWeather("27;299;4.0"));
 }
 
+TEST(WeatherClient, CheckParsingInvalidString)
+{
+    EXPECT_THROW(ParseWeather("asd;11;aaa"), std::runtime_error);
+}
+
 TEST(WeatherClient, CheckParsingMultipleStrings)
 {
     std::vector<std::string> response = {"20;181;5.1", "23;204;4.9", "33;193;4.3"};
