@@ -95,7 +95,7 @@ public:
     virtual double GetAverageTemperature(IWeatherServer& server, const std::string& date) = 0;
     virtual short GetMinimumTemperature(IWeatherServer& server, const std::string& date) = 0;
     virtual short GetMaximumTemperature(IWeatherServer& server, const std::string& date) = 0;
-//    virtual double GetAverageWindDirection(IWeatherServer& server, const std::string& date) = 0;
+    virtual double GetAverageWindDirection(IWeatherServer& server, const std::string& date) = 0;
 //    virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date) = 0;
 };
 
@@ -175,6 +175,22 @@ public:
 
         std::vector<short>::iterator result = std::max_element(std::begin(temps), std::end(temps));
         return *result;
+    }
+
+    double GetAverageWindDirection(IWeatherServer& server, const std::string& date)
+    {
+        unsigned short result = 0;
+
+        std::string response = server.GetWeather(date + ";03:00");
+        result += ParseWeather(response).windDirection;
+        response = server.GetWeather(date + ";09:00");
+        result += ParseWeather(response).windDirection;
+        response = server.GetWeather(date + ";15:00");
+        result += ParseWeather(response).windDirection;
+        response = server.GetWeather(date + ";21:00");
+        result += ParseWeather(response).windDirection;
+
+        return static_cast<double>(result)/4;
     }
 };
 
