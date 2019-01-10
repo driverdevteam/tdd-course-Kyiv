@@ -126,77 +126,78 @@ public:
 Weather ParseWeather(const std::string &data);
 class WeatherClient : public IWeatherClient
 {
-public:
-    double GetAverageTemperature(IWeatherServer& server, const std::string& date)
-    {
-        double result = 0;
-
-
-        std::string response = server.GetWeather(date + ";03:00");
-        result += ParseWeather(response).temperature;
-        response = server.GetWeather(date + ";09:00");
-        result += ParseWeather(response).temperature;
-        response = server.GetWeather(date + ";15:00");
-        result += ParseWeather(response).temperature;
-        response = server.GetWeather(date + ";21:00");
-        result += ParseWeather(response).temperature;
-
-
-        return result/4;
-    }
-
-    double GetMinimumTemperature(IWeatherServer& server, const std::string& date)
+    template <typename TAccessor>
+    double GetMaximum(IWeatherServer& server, const std::string& date, TAccessor accessor)
     {
         std::set<double> results;
 
-        results.insert(ParseWeather(server.GetWeather(date + ";03:00")).temperature);
-        results.insert(ParseWeather(server.GetWeather(date + ";09:00")).temperature);
-        results.insert(ParseWeather(server.GetWeather(date + ";15:00")).temperature);
-        results.insert(ParseWeather(server.GetWeather(date + ";21:00")).temperature);
+        results.insert(accessor(ParseWeather(server.GetWeather(date + ";03:00"))));
+        results.insert(accessor(ParseWeather(server.GetWeather(date + ";09:00"))));
+        results.insert(accessor(ParseWeather(server.GetWeather(date + ";15:00"))));
+        results.insert(accessor(ParseWeather(server.GetWeather(date + ";21:00"))));
+
+        return *results.rbegin();
+    }
+
+    template <typename TAccessor>
+    double GetMinimum(IWeatherServer& server, const std::string& date, TAccessor accessor)
+    {
+        std::set<double> results;
+
+        results.insert(accessor(ParseWeather(server.GetWeather(date + ";03:00"))));
+        results.insert(accessor(ParseWeather(server.GetWeather(date + ";09:00"))));
+        results.insert(accessor(ParseWeather(server.GetWeather(date + ";15:00"))));
+        results.insert(accessor(ParseWeather(server.GetWeather(date + ";21:00"))));
 
         return *results.begin();
     }
 
-    double GetMaximumTemperature(IWeatherServer& server, const std::string& date)
-    {
-        std::set<double> results;
-
-        results.insert(ParseWeather(server.GetWeather(date + ";03:00")).temperature);
-        results.insert(ParseWeather(server.GetWeather(date + ";09:00")).temperature);
-        results.insert(ParseWeather(server.GetWeather(date + ";15:00")).temperature);
-        results.insert(ParseWeather(server.GetWeather(date + ";21:00")).temperature);
-
-        return *results.rbegin();
-    }
-
-    double GetAverageWindDirection(IWeatherServer& server, const std::string& date)
+    template <typename TAccessor>
+    double GetAverage(IWeatherServer& server, const std::string& date, TAccessor accessor)
     {
         double result = 0;
 
-
         std::string response = server.GetWeather(date + ";03:00");
-        result += ParseWeather(response).windDirection;
+        result += accessor(ParseWeather(response));
         response = server.GetWeather(date + ";09:00");
-        result += ParseWeather(response).windDirection;
+        result += accessor(ParseWeather(response));
         response = server.GetWeather(date + ";15:00");
-        result += ParseWeather(response).windDirection;
+        result += accessor(ParseWeather(response));
         response = server.GetWeather(date + ";21:00");
-        result += ParseWeather(response).windDirection;
-
+        result += accessor(ParseWeather(response));
 
         return result/4;
     }
 
+public:
+    double GetAverageTemperature(IWeatherServer& server, const std::string& date)
+    {
+        auto accessor = [](const Weather& weather)->double{ return weather.temperature; };
+        return GetAverage(server, date, accessor);
+    }
+
+    double GetMinimumTemperature(IWeatherServer& server, const std::string& date)
+    {
+        auto accessor = [](const Weather& weather)->double{ return weather.temperature; };
+        return GetMinimum(server, date, accessor);
+    }
+
+    double GetMaximumTemperature(IWeatherServer& server, const std::string& date)
+    {
+        auto accessor = [](const Weather& weather)->double{ return weather.temperature; };
+        return GetMaximum(server, date, accessor);
+    }
+
+    double GetAverageWindDirection(IWeatherServer& server, const std::string& date)
+    {
+        auto accessor = [](const Weather& weather)->double{ return weather.windDirection; };
+        return GetAverage(server, date, accessor);
+    }
+
     double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date)
     {
-        std::set<double> results;
-
-        results.insert(ParseWeather(server.GetWeather(date + ";03:00")).windSpeed);
-        results.insert(ParseWeather(server.GetWeather(date + ";09:00")).windSpeed);
-        results.insert(ParseWeather(server.GetWeather(date + ";15:00")).windSpeed);
-        results.insert(ParseWeather(server.GetWeather(date + ";21:00")).windSpeed);
-
-        return *results.rbegin();
+        auto accessor = [](const Weather& weather)->double{ return weather.windSpeed; };
+        return GetMaximum(server, date, accessor);
     }
 };
 
