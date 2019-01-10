@@ -186,7 +186,7 @@ TEST(WeatherClient, CheckParsingValidString)
     Weather wether;
     wether.temperature = 27;
     wether.windDirection = 299;
-    wether.windSpeed = 4.0f;
+    wether.windSpeed = 4.0;
 
     ASSERT_EQ(wether, ParseWeather("27;299;4.0"));
 }
@@ -198,17 +198,17 @@ TEST(WeatherClient, CheckParsingMultipleStrings)
     Weather wether0;
     wether0.temperature = 20;
     wether0.windDirection = 181;
-    wether0.windSpeed = 5.1f;
+    wether0.windSpeed = 5.1;
 
     Weather wether1;
     wether1.temperature = 23;
     wether1.windDirection = 204;
-    wether1.windSpeed = 4.9f;
+    wether1.windSpeed = 4.9;
 
     Weather wether2;
     wether2.temperature = 33;
     wether2.windDirection = 193;
-    wether2.windSpeed = 4.3f;
+    wether2.windSpeed = 4.3;
 
     std::vector<Weather> result = {wether0, wether1, wether2};
     ASSERT_EQ(result , ParseWeather(response));
@@ -219,5 +219,16 @@ TEST(WeatherClient, GetAverageTemperatureFor31_08_2018)
     WeatherServerStub server;
     WeatherClient client;
 
-    ASSERT_FLOAT_EQ(25.5f, client.GetAverageTemperature(server, "31.08.2018"));
+    ASSERT_DOUBLE_EQ(25.5, client.GetAverageTemperature(server, "31.08.2018"));
+}
+
+TEST(WeatherClient, AverageTemperatureAcceptance)
+{
+    WeatherServerStub server;
+    WeatherClient client;
+
+    ASSERT_DOUBLE_EQ(25.5, client.GetAverageTemperature(server, "31.08.2018"));
+    ASSERT_DOUBLE_EQ(24.0, client.GetAverageTemperature(server, "01.09.2018"));
+    ASSERT_DOUBLE_EQ(26.75, client.GetAverageTemperature(server, "02.09.2018"));
+    EXPECT_THROW(client.GetAverageTemperature(server, "03.09.2018"), std::runtime_error);
 }
