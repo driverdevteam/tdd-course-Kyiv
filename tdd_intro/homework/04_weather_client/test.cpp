@@ -96,7 +96,7 @@ public:
     virtual double GetMinimumTemperature(IWeatherServer& server, const std::string& date) = 0;
     virtual double GetMaximumTemperature(IWeatherServer& server, const std::string& date) = 0;
     virtual double GetAverageWindDirection(IWeatherServer& server, const std::string& date) = 0;
-//    virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date) = 0;
+    virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date) = 0;
 };
 
 class WeatherServerStub : public IWeatherServer
@@ -185,6 +185,18 @@ public:
 
 
         return result/4;
+    }
+
+    double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date)
+    {
+        std::set<double> results;
+
+        results.insert(ParseWeather(server.GetWeather(date + ";03:00")).windSpeed);
+        results.insert(ParseWeather(server.GetWeather(date + ";09:00")).windSpeed);
+        results.insert(ParseWeather(server.GetWeather(date + ";15:00")).windSpeed);
+        results.insert(ParseWeather(server.GetWeather(date + ";21:00")).windSpeed);
+
+        return *results.rbegin();
     }
 };
 
@@ -334,5 +346,5 @@ TEST(WeatherClient, GetAverageWindSpeedFor31_08_2018)
     WeatherServerStub server;
     WeatherClient client;
 
-    ASSERT_DOUBLE_EQ(0, client.GetAverageWindSpeed(server, "31.08.2018"));
+    ASSERT_DOUBLE_EQ(5.1, client.GetMaximumWindSpeed(server, "31.08.2018"));
 }
