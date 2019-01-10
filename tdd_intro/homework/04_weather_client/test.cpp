@@ -94,7 +94,7 @@ public:
     virtual ~IWeatherClient() { }
     virtual double GetAverageTemperature(IWeatherServer& server, const std::string& date) = 0;
     virtual double GetMinimumTemperature(IWeatherServer& server, const std::string& date) = 0;
-//    virtual double GetMaximumTemperature(IWeatherServer& server, const std::string& date) = 0;
+    virtual double GetMaximumTemperature(IWeatherServer& server, const std::string& date) = 0;
 //    virtual double GetAverageWindDirection(IWeatherServer& server, const std::string& date) = 0;
 //    virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date) = 0;
 };
@@ -155,6 +155,18 @@ public:
         results.insert(ParseWeather(server.GetWeather(date + ";21:00")).temperature);
 
         return *results.begin();
+    }
+
+    double GetMaximumTemperature(IWeatherServer& server, const std::string& date)
+    {
+        std::set<double> results;
+
+        results.insert(ParseWeather(server.GetWeather(date + ";03:00")).temperature);
+        results.insert(ParseWeather(server.GetWeather(date + ";09:00")).temperature);
+        results.insert(ParseWeather(server.GetWeather(date + ";15:00")).temperature);
+        results.insert(ParseWeather(server.GetWeather(date + ";21:00")).temperature);
+
+        return *results.rbegin();
     }
 };
 
