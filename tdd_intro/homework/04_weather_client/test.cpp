@@ -328,3 +328,11 @@ TEST(WeatherClient, AverageWindDirectionAcceptance)
     ASSERT_DOUBLE_EQ(229, client.GetAverageWindDirection(server, "02.09.2018"));
     EXPECT_THROW(client.GetAverageWindDirection(server, "03.09.2018"), std::runtime_error);
 }
+
+TEST(WeatherClient, GetAverageWindSpeedFor31_08_2018)
+{
+    WeatherServerStub server;
+    WeatherClient client;
+
+    ASSERT_DOUBLE_EQ(0, client.GetAverageWindSpeed(server, "31.08.2018"));
+}
