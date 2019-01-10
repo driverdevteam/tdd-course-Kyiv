@@ -292,3 +292,11 @@ TEST(WeatherClient, MaximumTemperatureAcceptance)
     ASSERT_DOUBLE_EQ(34, client.GetMaximumTemperature(server, "02.09.2018"));
     EXPECT_THROW(client.GetMaximumTemperature(server, "03.09.2018"), std::runtime_error);
 }
+
+TEST(WeatherClient, GetAverageWindDirectionFor31_08_2018)
+{
+    WeatherServerStub server;
+    WeatherClient client;
+
+    ASSERT_DOUBLE_EQ(666, client.GetAverageWindDirecion(server, "31.08.2018"));
+}
