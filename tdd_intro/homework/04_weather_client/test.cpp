@@ -95,7 +95,7 @@ public:
     virtual double GetAverageTemperature(IWeatherServer& server, const std::string& date) = 0;
     virtual double GetMinimumTemperature(IWeatherServer& server, const std::string& date) = 0;
     virtual double GetMaximumTemperature(IWeatherServer& server, const std::string& date) = 0;
-//    virtual double GetAverageWindDirection(IWeatherServer& server, const std::string& date) = 0;
+    virtual double GetAverageWindDirection(IWeatherServer& server, const std::string& date) = 0;
 //    virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date) = 0;
 };
 
@@ -167,6 +167,24 @@ public:
         results.insert(ParseWeather(server.GetWeather(date + ";21:00")).temperature);
 
         return *results.rbegin();
+    }
+
+    double GetAverageWindDirection(IWeatherServer& server, const std::string& date)
+    {
+        double result = 0;
+
+
+        std::string response = server.GetWeather(date + ";03:00");
+        result += ParseWeather(response).windDirection;
+        response = server.GetWeather(date + ";09:00");
+        result += ParseWeather(response).windDirection;
+        response = server.GetWeather(date + ";15:00");
+        result += ParseWeather(response).windDirection;
+        response = server.GetWeather(date + ";21:00");
+        result += ParseWeather(response).windDirection;
+
+
+        return result/4;
     }
 };
 
@@ -298,5 +316,15 @@ TEST(WeatherClient, GetAverageWindDirectionFor31_08_2018)
     WeatherServerStub server;
     WeatherClient client;
 
-    ASSERT_DOUBLE_EQ(666, client.GetAverageWindDirecion(server, "31.08.2018"));
+    ASSERT_DOUBLE_EQ(189.25, client.GetAverageWindDirection(server, "31.08.2018"));
+}
+
+TEST(WeatherClient, AverageWindDirectionAcceptance)
+{
+    WeatherServerStub server;
+    WeatherClient client;
+
+    ASSERT_DOUBLE_EQ(135.75, client.GetAverageWindDirection(server, "01.09.2018"));
+    ASSERT_DOUBLE_EQ(229, client.GetAverageWindDirection(server, "02.09.2018"));
+    EXPECT_THROW(client.GetAverageWindDirection(server, "03.09.2018"), std::runtime_error);
 }
