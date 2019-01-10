@@ -262,3 +262,12 @@ TEST(WeatherClient, MinimumTempertureAcceptance)
     ASSERT_DOUBLE_EQ(21, client.GetMinimumTemperature(server, "02.09.2018"));
     EXPECT_THROW(client.GetMinimumTemperature(server, "03.09.2018"), std::runtime_error);
 }
+
+TEST(WeatherClient, GetMaximumTemperatureFor31_08_2018)
+{
+    WeatherServerStub server;
+    WeatherClient client;
+
+    ASSERT_DOUBLE_EQ(33, client.GetMaximumTemperature(server, "31.08.2018"));
+}
+
