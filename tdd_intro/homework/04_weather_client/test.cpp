@@ -341,10 +341,20 @@ TEST(WeatherClient, AverageWindDirectionAcceptance)
     EXPECT_THROW(client.GetAverageWindDirection(server, "03.09.2018"), std::runtime_error);
 }
 
-TEST(WeatherClient, GetAverageWindSpeedFor31_08_2018)
+TEST(WeatherClient, GetMaximumWindSpeedFor31_08_2018)
 {
     WeatherServerStub server;
     WeatherClient client;
 
     ASSERT_DOUBLE_EQ(5.1, client.GetMaximumWindSpeed(server, "31.08.2018"));
+}
+
+TEST(WeatherClient, MaximumWindSpeedAcceptance)
+{
+    WeatherServerStub server;
+    WeatherClient client;
+
+    ASSERT_DOUBLE_EQ(4.2, client.GetMaximumWindSpeed(server, "01.09.2018"));
+    ASSERT_DOUBLE_EQ(4.0, client.GetMaximumWindSpeed(server, "02.09.2018"));
+    EXPECT_THROW(client.GetMaximumWindSpeed(server, "03.09.2018"), std::runtime_error);
 }
