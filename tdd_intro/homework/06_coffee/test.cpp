@@ -98,10 +98,10 @@ public:
             break;
 
         case Latte:
-            m_source->SetCupSize(LittleCup);
-            m_source->AddMilk(LittleCup / 4);
-            m_source->AddCoffee(LittleCup / 2);
-            m_source->AddMilkFoam(LittleCup / 4);
+            m_source->SetCupSize(size);
+            m_source->AddMilk(size / 4);
+            m_source->AddCoffee(size / 2);
+            m_source->AddMilkFoam(size / 4);
             break;
 
         default:
