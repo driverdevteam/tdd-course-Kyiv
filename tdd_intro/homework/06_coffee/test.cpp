@@ -14,6 +14,22 @@ We have 2 possible sizes of the cup:
 Implement worked coffee machine using ISourceOfIngredients to controll the process of coffee production.
 */
 
+/*
+ * 1) Americano/little cup test
+ * 2) Americano/big cup test
+ * 3) cappuccino/little cup test
+ * 4) cappuccino/big cup test
+ * 5) latte/little cup test
+ * 6) latte/big cup test
+ * 7) marochino/little cup test
+ * 8) marochino/big cup test
+ * 9) marochino ingredients order test
+ *
+ * Arch:
+ * 1) CoffeeMachine class
+ * 2) enum CoffeeCup
+ */
+
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
@@ -30,3 +46,81 @@ public:
     virtual void AddChocolate(int gram) = 0;
     virtual void AddCream(int gram) = 0;
 };
+
+class MockSourceOfIngridients : public ISourceOfIngredients
+{
+public:
+    MOCK_METHOD1(SetCupSize, void(int));
+    MOCK_METHOD2(AddWater, void(int, int));
+    MOCK_METHOD1(AddSugar, void(int));
+    MOCK_METHOD1(AddCoffee, void(int));
+    MOCK_METHOD1(AddMilk, void(int));
+    MOCK_METHOD1(AddMilkFoam, void(int));
+    MOCK_METHOD1(AddChocolate, void(int));
+    MOCK_METHOD1(AddCream, void(int));
+};
+
+enum CoffeeCupSize
+{
+    LittleCup = 100,
+    BigCup = 140,
+};
+
+enum CoffeeType
+{
+    Americano,
+    Cappuccino,
+};
+
+class CoffeeMachine
+{
+public:
+    CoffeeMachine(ISourceOfIngredients *source) : m_source(source)
+    {
+    }
+
+    void MakeCoffee(CoffeeType type, CoffeeCupSize size)
+    {
+        m_source->SetCupSize(size);
+        m_source->AddWater(size / 2, 60);
+        m_source->AddCoffee(size / 2);
+    }
+
+private:
+    ISourceOfIngredients *m_source;
+};
+
+void CheckAmericano(CoffeeCupSize size)
+{
+    MockSourceOfIngridients mock;
+    CoffeeMachine machine(&mock);
+
+    EXPECT_CALL(mock, SetCupSize(size)).Times(1);
+    EXPECT_CALL(mock, AddWater(size / 2, 60)).Times(1);
+    EXPECT_CALL(mock, AddCoffee(size / 2)).Times(1);
+
+    machine.MakeCoffee(Americano, size);
+}
+
+TEST(Coffee, AmericanoLittleCup)
+{
+    CheckAmericano(LittleCup);
+}
+
+TEST(Coffee, AmericanoBigCup)
+{
+    CheckAmericano(BigCup);
+}
+
+TEST(Coffee, CappuccinoLittleCup)
+{
+    MockSourceOfIngridients mock;
+    CoffeeMachine machine(&mock);
+
+    EXPECT_CALL(mock, SetCupSize(LittleCup)).Times(1);
+    EXPECT_CALL(mock, AddMilk(LittleCup / 3)).Times(1);
+    EXPECT_CALL(mock, AddCoffee(LittleCup / 3)).Times(1);
+    EXPECT_CALL(mock, AddMilkFoam(LittleCup / 3)).Times(1);
+
+    machine.MakeCoffee(Cappuccino, LittleCup);
+}
