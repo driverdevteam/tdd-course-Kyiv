@@ -209,3 +209,20 @@ TEST(Coffee, MocachinoBigCup)
 {
     CheckMocachino(BigCup);
 }
+
+TEST(Coffee, MocachinoLittleCupSequence)
+{
+    MockSourceOfIngridients mock;
+    CoffeeMachine machine(&mock);
+
+    {
+    ::testing::InSequence s;
+
+    EXPECT_CALL(mock, SetCupSize(LittleCup)).Times(1);
+    EXPECT_CALL(mock, AddChocolate(LittleCup / 4)).Times(1);
+    EXPECT_CALL(mock, AddCoffee(LittleCup / 4)).Times(1);
+    EXPECT_CALL(mock, AddMilkFoam(LittleCup / 4)).Times(1);
+    }
+
+    machine.MakeCoffee(Mocachino, LittleCup);
+}
