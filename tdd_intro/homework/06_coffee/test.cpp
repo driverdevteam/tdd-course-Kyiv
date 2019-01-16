@@ -71,6 +71,7 @@ enum CoffeeType
     Americano,
     Cappuccino,
     Latte,
+    Mocachino,
 };
 
 class CoffeeMachine
@@ -102,6 +103,13 @@ public:
             m_source->AddMilk(size / 4);
             m_source->AddCoffee(size / 2);
             m_source->AddMilkFoam(size / 4);
+            break;
+
+        case Mocachino:
+            m_source->SetCupSize(LittleCup);
+            m_source->AddChocolate(LittleCup / 4);
+            m_source->AddCoffee(LittleCup / 4);
+            m_source->AddMilkFoam(LittleCup / 4);
             break;
 
         default:
