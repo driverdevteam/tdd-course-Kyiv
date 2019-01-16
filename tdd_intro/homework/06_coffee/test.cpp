@@ -95,6 +95,9 @@ public:
             m_source->AddCoffee(LittleCup / 3);
             m_source->AddMilkFoam(LittleCup / 3);
             break;
+
+        default:
+            break;
         }
     }
 
