@@ -90,10 +90,10 @@ public:
             break;
 
         case Cappuccino:
-            m_source->SetCupSize(LittleCup);
-            m_source->AddMilk(LittleCup / 3);
-            m_source->AddCoffee(LittleCup / 3);
-            m_source->AddMilkFoam(LittleCup / 3);
+            m_source->SetCupSize(size);
+            m_source->AddMilk(size / 3);
+            m_source->AddCoffee(size / 3);
+            m_source->AddMilkFoam(size / 3);
             break;
 
         default:
