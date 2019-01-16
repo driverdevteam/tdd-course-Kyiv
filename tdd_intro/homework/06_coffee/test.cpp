@@ -149,3 +149,16 @@ TEST(Coffee, CappuccinoBigCup)
 {
     CheckCappucino(BigCup);
 }
+
+TEST(Coffee, LatteLittleCup)
+{
+    MockSourceOfIngridients mock;
+    CoffeeMachine machine(&mock);
+
+    EXPECT_CALL(mock, SetCupSize(LittleCup)).Times(1);
+    EXPECT_CALL(mock, AddMilk(LittleCup / 4)).Times(1);
+    EXPECT_CALL(mock, AddCoffee(LittleCup / 2)).Times(1);
+    EXPECT_CALL(mock, AddMilkFoam(LittleCup / 4)).Times(1);
+
+    machine.MakeCoffee(Latte, LittleCup);
+}
