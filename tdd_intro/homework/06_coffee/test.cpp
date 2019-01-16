@@ -83,30 +83,28 @@ public:
 
     void MakeCoffee(CoffeeType type, CoffeeCupSize size)
     {
+        m_source->SetCupSize(size);
+
         switch (type)
         {
         case Americano:
-            m_source->SetCupSize(size);
             m_source->AddWater(size / 2, 60);
             m_source->AddCoffee(size / 2);
             break;
 
         case Cappuccino:
-            m_source->SetCupSize(size);
             m_source->AddMilk(size / 3);
             m_source->AddCoffee(size / 3);
             m_source->AddMilkFoam(size / 3);
             break;
 
         case Latte:
-            m_source->SetCupSize(size);
             m_source->AddMilk(size / 4);
             m_source->AddCoffee(size / 2);
             m_source->AddMilkFoam(size / 4);
             break;
 
         case Mocachino:
-            m_source->SetCupSize(size);
             m_source->AddChocolate(size / 4);
             m_source->AddCoffee(size / 4);
             m_source->AddMilkFoam(size / 4);
@@ -159,6 +157,19 @@ void CheckLatte(CoffeeCupSize size)
     machine.MakeCoffee(Latte, size);
 }
 
+void CheckMocachino(CoffeeCupSize size)
+{
+    MockSourceOfIngridients mock;
+    CoffeeMachine machine(&mock);
+
+    EXPECT_CALL(mock, SetCupSize(size)).Times(1);
+    EXPECT_CALL(mock, AddChocolate(size / 4)).Times(1);
+    EXPECT_CALL(mock, AddCoffee(size / 4)).Times(1);
+    EXPECT_CALL(mock, AddMilkFoam(size / 4)).Times(1);
+
+    machine.MakeCoffee(Mocachino, size);
+}
+
 TEST(Coffee, AmericanoLittleCup)
 {
     CheckAmericano(LittleCup);
@@ -191,26 +202,10 @@ TEST(Coffee, LatteBigCup)
 
 TEST(Coffee, MocachinoLittleCup)
 {
-    MockSourceOfIngridients mock;
-    CoffeeMachine machine(&mock);
-
-    EXPECT_CALL(mock, SetCupSize(LittleCup)).Times(1);
-    EXPECT_CALL(mock, AddChocolate(LittleCup / 4)).Times(1);
-    EXPECT_CALL(mock, AddCoffee(LittleCup / 4)).Times(1);
-    EXPECT_CALL(mock, AddMilkFoam(LittleCup / 4)).Times(1);
-
-    machine.MakeCoffee(Mocachino, LittleCup);
+    CheckMocachino(LittleCup);
 }
 
 TEST(Coffee, MocachinoBigCup)
 {
-    MockSourceOfIngridients mock;
-    CoffeeMachine machine(&mock);
-
-    EXPECT_CALL(mock, SetCupSize(BigCup)).Times(1);
-    EXPECT_CALL(mock, AddChocolate(BigCup / 4)).Times(1);
-    EXPECT_CALL(mock, AddCoffee(BigCup / 4)).Times(1);
-    EXPECT_CALL(mock, AddMilkFoam(BigCup / 4)).Times(1);
-
-    machine.MakeCoffee(Mocachino, BigCup);
+    CheckMocachino(BigCup);
 }
