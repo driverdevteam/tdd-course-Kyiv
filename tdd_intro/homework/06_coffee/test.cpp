@@ -106,10 +106,10 @@ public:
             break;
 
         case Mocachino:
-            m_source->SetCupSize(LittleCup);
-            m_source->AddChocolate(LittleCup / 4);
-            m_source->AddCoffee(LittleCup / 4);
-            m_source->AddMilkFoam(LittleCup / 4);
+            m_source->SetCupSize(size);
+            m_source->AddChocolate(size / 4);
+            m_source->AddCoffee(size / 4);
+            m_source->AddMilkFoam(size / 4);
             break;
 
         default:
