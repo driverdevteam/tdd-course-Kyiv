@@ -33,6 +33,8 @@ Implement worked coffee machine using ISourceOfIngredients to controll the proce
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
+using namespace testing;
+
 class ISourceOfIngredients
 {
 public:
@@ -216,12 +218,12 @@ TEST(Coffee, MocachinoLittleCupSequence)
     CoffeeMachine machine(&mock);
 
     {
-    ::testing::InSequence s;
+        InSequence s;
 
-    EXPECT_CALL(mock, SetCupSize(LittleCup)).Times(1);
-    EXPECT_CALL(mock, AddChocolate(LittleCup / 4)).Times(1);
-    EXPECT_CALL(mock, AddCoffee(LittleCup / 4)).Times(1);
-    EXPECT_CALL(mock, AddMilkFoam(LittleCup / 4)).Times(1);
+        EXPECT_CALL(mock, SetCupSize(LittleCup)).Times(1);
+        EXPECT_CALL(mock, AddChocolate(LittleCup / 4)).Times(1);
+        EXPECT_CALL(mock, AddCoffee(LittleCup / 4)).Times(1);
+        EXPECT_CALL(mock, AddMilkFoam(LittleCup / 4)).Times(1);
     }
 
     machine.MakeCoffee(Mocachino, LittleCup);
