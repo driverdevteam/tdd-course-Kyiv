@@ -81,9 +81,21 @@ public:
 
     void MakeCoffee(CoffeeType type, CoffeeCupSize size)
     {
-        m_source->SetCupSize(size);
-        m_source->AddWater(size / 2, 60);
-        m_source->AddCoffee(size / 2);
+        switch (type)
+        {
+        case Americano:
+            m_source->SetCupSize(size);
+            m_source->AddWater(size / 2, 60);
+            m_source->AddCoffee(size / 2);
+            break;
+
+        case Cappuccino:
+            m_source->SetCupSize(LittleCup);
+            m_source->AddMilk(LittleCup / 3);
+            m_source->AddCoffee(LittleCup / 3);
+            m_source->AddMilkFoam(LittleCup / 3);
+            break;
+        }
     }
 
 private:
